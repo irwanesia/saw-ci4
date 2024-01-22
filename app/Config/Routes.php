@@ -13,7 +13,7 @@ $routes->get('/kriteria', 'Kriteria::index');
 
 $routes->get('/alternatif', 'Alternatif::index');
 
-$routes->get('/penilaian-alternatif', 'NilaiAlternatif::index');
+$routes->get('/penilaian-alternatif', 'Penilaian::index');
 
 $routes->get('/hitung-saw', 'HitungMetode::index');
 

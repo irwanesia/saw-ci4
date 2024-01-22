@@ -51,8 +51,11 @@
 
     <?= $this->renderSection('content') ?>
 
-    <?php // $this->include('layout/footer') 
+    <!-- footer -->
+    <?= $this->include('Layout/footer') 
     ?>
+
+    
 
   </div>
   <!-- Option 1: Bootstrap Bundle with Popper -->
