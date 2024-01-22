@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KriteriaModel extends Model
+class SubKriteriaModel extends Model
 {
-    protected $table      = 'kriteria';
-    protected $primaryKey = 'id_kriteria';
+    protected $table      = 'sub_kriteria';
+    protected $primaryKey = 'id_sub_kriteria';
 
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['kode_kriteria', 'nama', 'type', 'bobot', 'ada_pilihan'];
+    protected $allowedFields = ['id_kriteria', 'nama', 'nilai'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -26,25 +26,6 @@ class KriteriaModel extends Model
     protected $skipValidation     = false;
 
     
-    public function generateCode()
-    {
-        $builder = $this->table('barang');
-        $builder->selectMax('kode_brg', 'kodeMax');
-        $query = $builder->get();
-
-        if ($query->getNumRows() > 0) {
-            foreach ($query->getResult() as $key) {
-                $kd = '';
-                $ambildata = substr((string)$key->kodeMax, -3);
-                $increment = intval($ambildata) + 1;
-                $kd = sprintf('%03s', $increment);
-            }
-        } else {
-            $kd = '001';
-        }
-
-        return 'BRG-' . $kd;
-    }
 
     // fitur search
     public function search($keyword)

@@ -35,7 +35,7 @@
     </style>
   </head>
   <body>
-    <div class="container shadow-lg rounded-lg border-0 card h-75 position-absolute top-50 start-50 translate-middle">
+    <div class="container shadow-lg rounded-lg border-0 card position-absolute top-50 start-50 translate-middle">
 
         <?php // $this->include('layout/navbar') ?>
         

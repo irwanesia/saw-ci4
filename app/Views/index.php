@@ -86,7 +86,7 @@
             </a>        
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 mb-5">
         <div class="col-4">
             <a href="<?= base_url('/users') ?>" class="text-decoration-none">
                 <div class="card border-0 bg-light text-dark shadow-lg mb-3" style="max-width: 22rem;" id="menu">
