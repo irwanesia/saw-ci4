@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\UsersModel;
+
 class Users extends BaseController
 {
+    protected $users;
 
     public function __construct()
     {
@@ -11,12 +14,14 @@ class Users extends BaseController
         //     echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
         //     exit;
         // }
+        $this->users = new UsersModel();
     }
-    
+
     public function index()
     {
         $data = [
-            'title' => 'Users'
+            'title' => 'Data Users',
+            'users' => $this->users->findAll()
         ];
         return view('Users/index', $data);
     }
