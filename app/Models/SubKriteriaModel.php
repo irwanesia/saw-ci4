@@ -14,7 +14,7 @@ class SubKriteriaModel extends Model
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_kriteria', 'nama', 'nilai'];
+    protected $allowedFields = ['id_kriteria', 'sub_kriteria', 'nilai'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -25,7 +25,7 @@ class SubKriteriaModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    
+
 
     // fitur search
     public function search($keyword)

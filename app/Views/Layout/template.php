@@ -19,9 +19,15 @@
     body {
       font-family: 'Nunito', sans-serif;
       padding: 50px;
+      background-image: url('/img/bg.png');
+    }
+
+    .pastel-silver {
+      background-color: #fffadd;
     }
 
     #menu {
+      color: #333;
       border-radius: 4px;
       background: #fff;
       box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
@@ -44,7 +50,7 @@
 </head>
 
 <body>
-  <div class="container shadow-lg rounded-lg border-0 card">
+  <div class="container shadow-lg rounded-lg border-0 card pastel-silver">
 
     <?php // $this->include('layout/navbar') 
     ?>
@@ -52,10 +58,10 @@
     <?= $this->renderSection('content') ?>
 
     <!-- footer -->
-    <?= $this->include('Layout/footer') 
+    <?= $this->include('Layout/footer')
     ?>
 
-    
+
 
   </div>
   <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -71,8 +77,35 @@
     -->
 
   <script>
+    // datatable
     $(document).ready(function() {
       $('#myTable').DataTable();
+    });
+
+    // membuat kode untuk kode data barang
+    $(document).ready(function() {
+      $.ajax({
+        url: "<?= site_url('alternatif/kode') ?>",
+        type: "GET",
+        success: function(hasil) {
+          // alert(hasil);
+          var obj = $.parseJSON(hasil);
+          $('#kodeAlternatif').val(obj);
+        }
+      });
+    });
+
+    // membuat kode untuk kode data barang
+    $(document).ready(function() {
+      $.ajax({
+        url: "<?= site_url('kriteria/kode') ?>",
+        type: "GET",
+        success: function(hasil) {
+          // alert(hasil);
+          var obj = $.parseJSON(hasil);
+          $('#kodeKriteria').val(obj);
+        }
+      });
     });
   </script>
 </body>

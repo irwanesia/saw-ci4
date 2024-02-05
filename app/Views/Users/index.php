@@ -10,12 +10,15 @@
     </nav>
     <div class="card mt-5 shadow-sm">
         <div class="card-header d-flex justify-content-between">
-            <h5>Data Alternatif</h5>
-            <a href="#tambah-users" class="btn btn-sm btn-primary">Tambah Users</a>
+            <h6 class="text-muted">Data Users</h6>
+            <a href="<?= base_url('/users/tambah') ?>" class="btn btn-sm btn-primary">Tambah Users</a>
         </div>
         <div class="card-body m-2">
+            <?php if (session()->getFlashdata('pesan')) : ?>
+                <?= session()->getFlashdata('pesan') ?>
+            <?php endif ?>
             <div class="table-responsive">
-                <table id="myTable" class="table">
+                <table id="myTable" class="table table-striped">
                     <thead>
                         <th>No</th>
                         <th>Nama</th>
@@ -24,16 +27,24 @@
                         <th>Aksi</th>
                     </thead>
                     <tbody>
-                        <?php $no = 0 ?>
+                        <?php $no = 1 ?>
                         <?php foreach ($users as $row) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $row['nama'] ?></td>
                                 <td><?= $row['username'] ?></td>
-                                <td><?= $row['role'] ?></td>
+                                <td><?= $row['role'] == 1 ? "Administrator" : "User"; ?></td>
                                 <td>
-                                    <a href="/edit-user" class="btn btn-sm btn-secondary">Edit</a>
-                                    <a href="/hapus-user" class="btn btn-sm btn-danger">Hapus</a>
+                                    <form action="/users/edit/<?= $row['id_user'] ?>" method="get" class="d-inline">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="_method" value="GET">
+                                        <button type="submit" class="btn btn-sm btn-warning">Edit</button>
+                                    </form>
+                                    <form action="/users/hapus/<?= $row['id_user'] ?>" method="post" class="d-inline">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah yakin?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach ?>

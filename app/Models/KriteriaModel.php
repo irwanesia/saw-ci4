@@ -14,7 +14,7 @@ class KriteriaModel extends Model
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['kode_kriteria', 'nama', 'type', 'bobot', 'ada_pilihan'];
+    protected $allowedFields = ['kode_kriteria', 'kriteria', 'type', 'bobot', 'ada_pilihan'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -25,35 +25,31 @@ class KriteriaModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    
+
+    // membuat kode alternatif auto
     public function generateCode()
     {
-        $builder = $this->table('barang');
-        $builder->selectMax('kode_brg', 'kodeMax');
+        $builder = $this->table('alternatif');
+        $builder->selectMax('kode_kriteria', 'kodeMax');
         $query = $builder->get();
 
         if ($query->getNumRows() > 0) {
-            foreach ($query->getResult() as $key) {
-                $kd = '';
-                $ambildata = substr((string)$key->kodeMax, -3);
-                $increment = intval($ambildata) + 1;
-                $kd = sprintf('%03s', $increment);
-            }
+            $row = $query->getRow();
+            $kodeMax = $row->kodeMax;
+
+            // Mengambil angka dari kode terakhir (menghapus 'A' dan mengkonversi ke integer)
+            $number = intval(substr($kodeMax, 1));
+
+            // Menambahkan 1 ke angka tersebut
+            $newNumber = $number + 1;
+
+            // Membentuk kode baru dengan format 'C' diikuti oleh angka baru
+            $newKode = 'C' . $newNumber;
         } else {
-            $kd = '001';
+            // Jika tidak ada data, mulai dari 'A1'
+            $newKode = 'C1';
         }
 
-        return 'BRG-' . $kd;
-    }
-
-    // fitur search
-    public function search($keyword)
-    {
-        $builder = $this->table('barang')
-            ->like('kode_brg', $keyword)
-            ->orLike('nama_brg', $keyword)
-            ->orLike('satuan', $keyword)
-            ->orLike('harga', $keyword);
-        return $builder;
+        return $newKode;
     }
 }
