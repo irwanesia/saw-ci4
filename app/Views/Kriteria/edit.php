@@ -43,7 +43,7 @@
 
                     <div class="form-group col-md-6 mt-2">
                         <label class="form-label">Bobot</label>
-                        <input type="number" name="bobot" value="<?= $kriteria['bobot'] ?>" class="form-control" required />
+                        <input type="number" name="bobot" step="0.01" value="<?= $kriteria['bobot'] ?>" class="form-control" required />
                     </div>
                     <div class="form-group col-md-6 mt-2">
                         <label class="form-label">Cara Penilaian</label>

@@ -29,7 +29,7 @@
                         <th>Aksi</th>
                     </thead>
                     <tbody>
-                        <?php $no = 0 ?>
+                        <?php $no = 1 ?>
                         <?php foreach ($kriteria as $row) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
