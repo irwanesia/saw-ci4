@@ -24,4 +24,9 @@ class UsersModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function getUserByUsername($username)
+    {
+        return $this->where(['username' => $username])->first();
+    }
 }

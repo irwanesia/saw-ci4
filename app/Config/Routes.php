@@ -8,9 +8,16 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/Dashboard', 'Dashboard::index');
 $routes->get('/', 'Dashboard::home');
 
+// login
+$routes->get('/login', 'Auth::index');
+$routes->post('/login/auth', 'Auth::auth');
+// logout
+$routes->get('/logout', 'Auth::logout');
+
 // routes data users
 $routes->get('/users', 'Users::index');
 $routes->get('/users/tambah', 'Users::tambah');
+$routes->get('/users/simpan', 'Users::simpan');
 $routes->post('/users/simpan', 'Users::simpan');
 $routes->get('/users/edit/(:num)', 'Users::edit/$1');
 $routes->post('/users/update/(:num)', 'Users::update/$1');

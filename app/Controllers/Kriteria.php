@@ -12,10 +12,10 @@ class Kriteria extends BaseController
 
     public function __construct()
     {
-        // if (session()->get('login') != "login") {
-        //     echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
-        //     exit;
-        // }
+        if (session()->get('login') != "login") {
+            echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
+            exit;
+        }
         $this->kriteria = new KriteriaModel();
         $this->subKriteria = new SubKriteriaModel();
     }

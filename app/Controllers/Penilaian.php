@@ -16,10 +16,10 @@ class Penilaian extends BaseController
 
     public function __construct()
     {
-        // if (session()->get('login') != "login") {
-        //     echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
-        //     exit;
-        // }
+        if (session()->get('login') != "login") {
+            echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
+            exit;
+        }
         $this->penilaian = new PenilaianModel();
         $this->alternatif = new AlternatifModel();
         $this->kriteria = new KriteriaModel();

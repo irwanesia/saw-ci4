@@ -10,10 +10,10 @@ class Users extends BaseController
 
     public function __construct()
     {
-        // if (session()->get('login') != "login") {
-        //     echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
-        //     exit;
-        // }
+        if (session()->get('login') != "login") {
+            echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
+            exit;
+        }
         $this->users = new UsersModel();
     }
 
@@ -68,7 +68,7 @@ class Users extends BaseController
 
         // enkripsi password dengan Bcrypt
         $password = $this->request->getVar('password');
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $this->users->save([
             'username' => $this->request->getVar('username'),
