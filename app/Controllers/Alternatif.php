@@ -11,8 +11,8 @@ class Alternatif extends BaseController
     public function __construct()
     {
         if (session()->get('login') != "login") {
-            echo 'Access denied, Klik <a href="/">login<a> untuk masuk kembali..';
-            exit;
+            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
+            // exit;
         }
         $this->alternatif = new AlternatifModel();
     }

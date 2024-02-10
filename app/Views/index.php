@@ -2,8 +2,18 @@
 
 <?= $this->section('content') ?>
 <div class="border-0 mx-5 h-75">
-    <h5 class="text-center mt-3 mb-5">Sistem Pendukung Keputusan Metode SAW <br>
-        (<i>Simple Additive Weighting</i>)</h5>
+    <div class="container bg-primary rounded">
+        <div class="row mt-5">
+            <div class="col-md-6 align-self-center">
+                <img src="<?= base_url('icon/criteria.png') ?>" class="align-self-center" width="270" alt="">
+            </div>
+            <div class="col-md-6 text-white align-self-center">
+                <h1>Aplikasi SPK</h1>
+                <h5 class="my-3">Menggunakan Metode (<i>Simple Additive Weighting</i>)</h5>
+                <a href="" class="btn rounded-pill btn-outline-light">Dashboard</a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-4 col-md-6">
             <a href="<?= base_url('/users') ?>" class="text-decoration-none">

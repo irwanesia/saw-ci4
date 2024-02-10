@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\UsersModel;
 
@@ -27,11 +29,11 @@ class Auth extends BaseController
         //ambil data user di database yang usernamenya sama 
         $user = $this->user->where('username', $data['username'])->first();
 
-        if($user){
+        if ($user) {
             // cek password, jika benar buat session dan arahkan ke halaman utama
             $authenticatePassword = password_verify($data['password'], $user['password']);
             // dd($authenticatePassword); // outputnya false
-            if($authenticatePassword){
+            if ($authenticatePassword) {
                 $ses_data = [
                     'id_user' => $user['id_user'], // Harusnya mengambil dari $user bukan $data
                     'username' => $user['username'], // Ini juga, untuk memastikan data yang disimpan sesuai dengan yang ada di database
@@ -39,12 +41,12 @@ class Auth extends BaseController
                     'isLoggedIn' => TRUE
                 ];
                 $this->session->set($ses_data);
-                return redirect()->to('/');
-            }else{
+                return redirect()->to('/alternatif');
+            } else {
                 $this->session->setFlashdata('msg', 'Password salah');
                 return redirect()->to('/login');
             }
-        }else{
+        } else {
             $this->session->setFlashdata('msg', 'Username tidak ditemukan');
             return redirect()->to('/login');
         }
@@ -56,5 +58,4 @@ class Auth extends BaseController
         $this->session->destroy();
         return redirect()->to('/login');
     }
-
 }
