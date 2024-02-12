@@ -9,7 +9,10 @@
   <title><?= $title ?></title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="<?= base_url('fontawesome-free-5.15.4-web/css/all.css') ?>">
 
   <!-- datatables -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
@@ -17,7 +20,7 @@
 
   <style>
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: 'monserat', sans-serif;
       padding: 50px;
       background-image: url('/img/bg.png');
     }
@@ -50,7 +53,7 @@
 </head>
 
 <body>
-  <div class="container shadow-lg rounded-lg border-0 card pastel-silver">
+  <div class="container <?= $title == 'Login' ? '' : 'shadow-lg rounded-lg border-0 card pastel-silver' ?>">
 
     <?php // $this->include('layout/navbar') 
     ?>

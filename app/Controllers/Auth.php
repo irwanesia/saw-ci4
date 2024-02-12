@@ -18,7 +18,10 @@ class Auth extends BaseController
     }
     public function index()
     {
-        return view('login');
+        $data = [
+            'title' => 'Login',
+        ];
+        return view('login', $data);
     }
 
     public function auth()
