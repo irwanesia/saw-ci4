@@ -55,14 +55,20 @@
 <body>
   <div class="container <?= $title == 'Login' ? '' : 'shadow-lg rounded-lg border-0 card pastel-silver' ?>">
 
-    <?php // $this->include('layout/navbar') 
-    ?>
-
+  <div class="<?= $title == 'Login' ? 'd-none' : 'mx-5 my-3' ?>">
+    <nav class="<?= $title == 'Login' ? 'd-none' : '' ?>" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?= $title ?></li>
+        </ol>
+    </nav>
+      
     <?= $this->renderSection('content') ?>
-
+  
+  </div>
     <!-- footer -->
-    <?= $this->include('Layout/footer')
-    ?>
+    
+    <?= $this->include('Layout/footer') ?>
 
 
 
@@ -72,13 +78,14 @@
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <!-- chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
-
   <script>
     // datatable
     $(document).ready(function() {
@@ -109,6 +116,48 @@
           $('#kodeKriteria').val(obj);
         }
       });
+    });
+
+    const barChart = document.getElementById('barChart');
+
+    new Chart(barChart, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Augt', 'Sept', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Layak',
+          data: [3, 10, 3, 5, 2, 3, 7, 11, 3, 5, 2, 3], // Contoh data untuk "Layak"
+          backgroundColor: 'rgba(43,178,242)', // Warna hijau muda
+        }, {
+          label: 'Tidak Layak',
+          data: [5, 6, 7, 2, 5, 8, 4, 2, 5, 3, 6, 7], // Contoh data untuk "Tidak Layak"
+          backgroundColor: 'rgba(235,35,50)', // Warna merah muda
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const pieChart = document.getElementById('pieChart');
+    new Chart(pieChart, {
+      type: 'pie',
+      data: {
+        labels: ['Layak','Tidak Layak'],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [50, 23],
+          backgroundColor: [
+            'rgba(43,178,242)',
+            'rgba(235,35,50)'
+          ],
+          hoverOffset: 4
+        }]
+      }
     });
   </script>
 </body>

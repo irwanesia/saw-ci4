@@ -1,13 +1,6 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="mx-5 my-3">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Data kriteria</li>
-        </ol>
-    </nav>
     <div class="card mt-5 shadow-sm">
         <div class="card-header d-sm-flex align-items-center justify-content-between">
             <h6 class="text-muted">Edit Data Kriteria</h6>
@@ -59,6 +52,5 @@
                 <button type="reset" class="btn btn-info btn-sm"><i class="fa fa-sync-alt"></i> Reset</button>
             </div>
         </form>
-    </div>
 </div>
 <?= $this->endSection('content') ?>

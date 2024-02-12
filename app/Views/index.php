@@ -22,7 +22,7 @@
             <div class="col-md-6 text-white align-self-center">
                 <h1>Aplikasi SPK</h1>
                 <h5 class="mt-2 mb-3">Metode SAW (<i>Simple Additive Weighting</i>)</h5>
-                <a href="" class="btn rounded-pill btn-outline-light">Dashboard</a>
+                <a href="/dashboard" class="btn rounded-pill btn-outline-light">Dashboard</a>
             </div>
         </div>
     </div>

@@ -1,14 +1,6 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="mx-5 my-3">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data Sub Kriteria</li>
-        </ol>
-    </nav>
-
     <!-- table data subkriteria -->
     <?php if (session()->getFlashdata('pesan')) : ?>
         <?= session()->getFlashdata('pesan') ?>
@@ -67,6 +59,5 @@
             </div>
         </div>
     <?php endforeach ?>
-</div>
 
 <?= $this->endSection('content') ?>

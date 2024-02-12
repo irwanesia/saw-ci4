@@ -1,13 +1,6 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="mx-5 my-3">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data Penilaian</li>
-        </ol>
-    </nav>
     <div class="card mt-5 shadow-sm">
         <div class="card-header d-flex justify-content-between">
             <h5>Daftar Data Penilaian</h5>
@@ -56,6 +49,5 @@
             </div>
         </div>
     </div>
-</div>
 
 <?= $this->endSection('content') ?>

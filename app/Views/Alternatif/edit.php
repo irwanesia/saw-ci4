@@ -1,13 +1,6 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="mx-5 my-3">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tambah Data Alternatif</li>
-        </ol>
-    </nav>
     <div class="card mt-5 shadow-sm">
         <div class="card-header d-sm-flex align-items-center justify-content-between">
             <h6 class="text-muted">Tambah Data Alternatif</h6>
@@ -42,5 +35,4 @@
             </div>
         </form>
     </div>
-</div>
 <?= $this->endSection('content') ?>
