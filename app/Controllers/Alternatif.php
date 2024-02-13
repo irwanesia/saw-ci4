@@ -7,6 +7,8 @@ use App\Models\AlternatifModel;
 class Alternatif extends BaseController
 {
     protected $alternatif;
+    protected $dataBulan;
+    protected $dataTahun;
 
     public function __construct()
     {
@@ -15,56 +17,30 @@ class Alternatif extends BaseController
             // exit;
         }
         $this->alternatif = new AlternatifModel();
-    }
-
-    public function index($bulan, $tahun)
-    {
+        
         // membuat bulan untuk keperluan periode
-        $dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-
+        $this->dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    
         // membuat range tahun untuk keperluan periode
         $thnAwal = 2022;
         $thnAkhir = intval(date('Y'));
         $jumlahThn = $thnAkhir - $thnAwal;
-        $dataTahun = [];
+        $this->dataTahun = [];
         for ($i = 0; $i <= $jumlahThn; $i++) {
-            $dataTahun[] = $thnAwal + $i;
+            $this->dataTahun[] = $thnAwal + $i;
         }
-
-        // $bulan = $this->request->getVar('bulan');
-        // $tahun = $this->request->getVar('tahun');
-
-        // Inisialisasi variabel untuk menampung data alternatif
-        // $alternatif = [];
-
-        // Cek apakah bulan dan tahun telah ditentukan
-        // if (!is_null($bulan) && !is_null($tahun)) {
-        // Konversi bulan dari nama ke angka
-        // $bulanAngka = array_search($bulan, $dataBulan) + 1; // Mengasumsikan bulan disimpan dalam bentuk angka di database
-
-        // Konversi tahun dari 4 digit ke 2 digit terakhir
-        // $tahunDuaDigit = substr($tahun, -2);
-
-        // Dapatkan data alternatif berdasarkan periode
-        // $alternatif = $this->alternatif->getPeriode($bulan, $tahun);
-        // dd($alternatif);
-        // }
-
+    }
+    
+    public function index($bulan = null, $tahun = null)
+    {
         $data = [
             'title' => 'Data Alternatif',
-            'dataBulan' => $dataBulan,
-            'dataTahun' => $dataTahun,
+            'dataBulan' => $this->dataBulan,
+            'dataTahun' => $this->dataTahun,
             'alternatif' => $this->alternatif->getPeriode($bulan, $tahun) // Gunakan data alternatif berdasarkan periode
         ];
         return view('alternatif/index', $data);
     }
-
-    public function periode()
-    {
-        // Logic untuk mengambil data berdasarkan bulan dan tahun
-        // Kirim data ke view
-    }
-
 
     public function autoKode()
     {
@@ -76,6 +52,8 @@ class Alternatif extends BaseController
         // session dipindahkan ke basecontroller
         $data = [
             'title' => 'Tambah Data Alternatif',
+            'dataBulan' => $this->dataBulan,
+            'dataTahun' => $this->dataTahun,
             'validation' => \Config\Services::validation()
         ];
         return view('alternatif/tambah', $data);
@@ -98,6 +76,8 @@ class Alternatif extends BaseController
         }
 
         $this->alternatif->save([
+            'id_bulan' => $this->request->getVar('bulan'),
+            'id_tahun' => $this->request->getVar('tahun'),
             'kode' => $this->request->getVar('kode'),
             'alternatif' => $this->request->getVar('alternatif'),
         ]);
@@ -113,6 +93,8 @@ class Alternatif extends BaseController
     {
         $data = [
             'title' => 'Edit Alternatif',
+            'dataBulan' => $this->dataBulan,
+            'dataTahun' => $this->dataTahun,
             'alternatif' => $this->alternatif->find($id),
             'validation' => \Config\Services::validation()
         ];
@@ -137,6 +119,9 @@ class Alternatif extends BaseController
 
         $this->alternatif->save([
             'id_alternatif' => $id,
+            'id_bulan' =>  $this->request->getVar('bulan'),
+            'id_tahun' =>  $this->request->getVar('tahun'),
+            'kode' =>  $this->request->getVar('kode'),
             'alternatif' => $this->request->getVar('alternatif'),
         ]);
 

@@ -3,8 +3,9 @@
 <?= $this->section('content') ?>
 <div class="card mt-5 shadow-sm">
     <!-- /.card-header -->
-    <div class="card-header py-3">
+    <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Pilih Periode</h6>
+        <a href="<?= base_url('/alternatif/tambah') ?>" class="btn btn-sm btn-primary">+ Tambah Alternatif</a>
     </div>
     <form id="periodeForm">
         <div class="row">
@@ -23,7 +24,7 @@
                     <select class="form-control" name="tahun" id="tahun">
                         <option value="#" disabled selected>-- Pilih Tahun --</option>
                         <?php foreach ($dataTahun as $key => $tahun) : ?>
-                            <option value="<?= 2 . $key + 2 ?>"><?= $tahun ?></option>
+                            <option value="<?= 2 . $key + 2 ?>" ><?= $tahun ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -35,9 +36,8 @@
 <!-- cek apakah ada data alternatif -->
 <?php if (!empty($alternatif)) : ?>
     <div class="card mt-4 shadow-sm">
-        <div class="card-header d-flex justify-content-between">
-            <h6 class="text-muted">Data Alternatif</h6>
-            <a href="<?= base_url('/alternatif/tambah') ?>" class="btn btn-sm btn-primary">Tambah Alternatif</a>
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Data Aternatif</h6>
         </div>
         <div class="card-body m-2">
             <?php if (session()->getFlashdata('pesan')) : ?>
