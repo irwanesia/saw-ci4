@@ -17,14 +17,54 @@ class Alternatif extends BaseController
         $this->alternatif = new AlternatifModel();
     }
 
-    public function index()
+    public function index($bulan, $tahun)
     {
+        // membuat bulan untuk keperluan periode
+        $dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+        // membuat range tahun untuk keperluan periode
+        $thnAwal = 2022;
+        $thnAkhir = intval(date('Y'));
+        $jumlahThn = $thnAkhir - $thnAwal;
+        $dataTahun = [];
+        for ($i = 0; $i <= $jumlahThn; $i++) {
+            $dataTahun[] = $thnAwal + $i;
+        }
+
+        // $bulan = $this->request->getVar('bulan');
+        // $tahun = $this->request->getVar('tahun');
+
+        // Inisialisasi variabel untuk menampung data alternatif
+        // $alternatif = [];
+
+        // Cek apakah bulan dan tahun telah ditentukan
+        // if (!is_null($bulan) && !is_null($tahun)) {
+        // Konversi bulan dari nama ke angka
+        // $bulanAngka = array_search($bulan, $dataBulan) + 1; // Mengasumsikan bulan disimpan dalam bentuk angka di database
+
+        // Konversi tahun dari 4 digit ke 2 digit terakhir
+        // $tahunDuaDigit = substr($tahun, -2);
+
+        // Dapatkan data alternatif berdasarkan periode
+        // $alternatif = $this->alternatif->getPeriode($bulan, $tahun);
+        // dd($alternatif);
+        // }
+
         $data = [
             'title' => 'Data Alternatif',
-            'alternatif' => $this->alternatif->findAll()
+            'dataBulan' => $dataBulan,
+            'dataTahun' => $dataTahun,
+            'alternatif' => $this->alternatif->getPeriode($bulan, $tahun) // Gunakan data alternatif berdasarkan periode
         ];
         return view('alternatif/index', $data);
     }
+
+    public function periode()
+    {
+        // Logic untuk mengambil data berdasarkan bulan dan tahun
+        // Kirim data ke view
+    }
+
 
     public function autoKode()
     {

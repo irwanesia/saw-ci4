@@ -42,6 +42,7 @@ $routes->delete('/sub-kriteria/hapus/(:num)', 'Kriteria::deleteSubKriteria/$1');
 
 // routes data alternatif
 $routes->get('/alternatif', 'Alternatif::index');
+$routes->get('/alternatif/periode/(:any)/(:any)', 'Alternatif::index/$1/$2');
 $routes->get('/alternatif/tambah', 'Alternatif::tambah');
 $routes->get('/alternatif/kode', 'Alternatif::autoKode');
 $routes->post('/alternatif/simpan', 'Alternatif::simpan');

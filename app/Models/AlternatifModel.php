@@ -14,7 +14,7 @@ class AlternatifModel extends Model
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['kode', 'alternatif'];
+    protected $allowedFields = ['id_bulan', 'id_tahun', 'kode', 'alternatif'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -50,5 +50,16 @@ class AlternatifModel extends Model
         }
 
         return $newKode;
+    }
+
+    public function getPeriode($bulan, $tahun)
+    {
+        $builder = $this->db->table('alternatif');
+        $builder->select('*');
+        $builder->where('id_bulan', $bulan);
+        $builder->where('id_tahun', $tahun);
+        $query = $builder->get();
+
+        return $query->getResultArray();
     }
 }

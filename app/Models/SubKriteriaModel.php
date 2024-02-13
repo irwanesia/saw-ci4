@@ -24,17 +24,4 @@ class SubKriteriaModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
-
-
-
-    // fitur search
-    public function search($keyword)
-    {
-        $builder = $this->table('barang')
-            ->like('kode_brg', $keyword)
-            ->orLike('nama_brg', $keyword)
-            ->orLike('satuan', $keyword)
-            ->orLike('harga', $keyword);
-        return $builder;
-    }
 }

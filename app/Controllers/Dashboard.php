@@ -34,8 +34,11 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        $tahun = $this->request->getVar('tahun');
+
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'bulan' => $this->hasil->getDataByTahun($tahun)
         ];
         return view('dashboard', $data);
     }
@@ -43,7 +46,7 @@ class Dashboard extends BaseController
     public function home()
     {
         $data = [
-            'title' => 'SPK SAW',
+            'title' => 'Simple Additive Weighting',
             'countKriteria' => $this->kriteria->countAllResults(),
             'countSubKriteria' => $this->subKriteria->countAllResults(),
             'countAlternatif' => $this->alternatif->countAllResults(),

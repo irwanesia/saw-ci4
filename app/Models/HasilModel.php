@@ -6,15 +6,15 @@ use CodeIgniter\Model;
 
 class HasilModel extends Model
 {
-    protected $table      = 'penilaian';
-    protected $primaryKey = 'id_penilaian';
+    protected $table      = 'hasil';
+    protected $primaryKey = 'id_hasil';
 
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_alternatif', 'id_kriteria', 'nilai'];
+    protected $allowedFields = ['id_alternatif', 'bulan', 'tahun', 'nilai', 'status'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -24,4 +24,12 @@ class HasilModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function getDataByTahun($tahun = null)
+    {
+        if (!is_null($tahun)) {
+            $this->where('tahun', $tahun);
+        }
+        return $this->findAll();
+    }
 }
