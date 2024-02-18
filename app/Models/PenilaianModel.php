@@ -69,7 +69,7 @@ class PenilaianModel extends Model
     public function getDistinctKriteria()
     {
         $builder = $this->db->table('penilaian p');
-        $builder->select('p.id_kriteria, k.*');
+        $builder->select('p.id_kriteria, p.id_alternatif, k.*');
         $builder->join('kriteria k', 'p.id_kriteria = k.id_kriteria');
         $builder->groupBy('p.id_kriteria');
         $builder->orderBy('p.id_kriteria', 'ASC');

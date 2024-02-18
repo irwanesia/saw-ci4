@@ -3,15 +3,16 @@
 <?= $this->section('content') ?>
 <div class="row mt-5 mb-3">
     <div class="col-md-9">
+        <?php  var_dump($dataForChart) ?>
         <div class="row">
             <div class="col-xl-4 col-md-6">
                 <a href="<?= base_url('/kriteria') ?>" class="text-decoration-none">
                     <div class="card border-0 shadow-lg mb-3" id="menu">
                         <div class="card-body">
-                            <h6 class="card-title align-self-center fw-bold">Data Kriteria</h6>
+                            <p class="fs-6 align-self-center fw-bold">Data Kriteria</p>
                             <div class="d-flex mt-3 justify-content-between">
-                                <h3>3</h3>
-                                <span class=""><i class="fas fa-clipboard"></i></span>
+                            <h3 class="align-self-center"><?= $countKriteria ?></h3>
+                                <span class="align-self-center"><i class="fas fa-clipboard"></i></span>
                             </div>
                         </div>
                     </div>
@@ -21,10 +22,10 @@
                 <a href="<?= base_url('/alternatif') ?>" class="text-decoration-none">
                     <div class="card border-0 shadow-lg mb-3" id="menu">
                         <div class="card-body">
-                            <h6 class="card-title align-self-center fw-bold">Data Alternatif</h6>
+                            <p class="fs-6 align-self-center fw-bold">Data Alternatif</p>
                             <div class="d-flex mt-3 justify-content-between">
-                                <h3>3</h3>
-                                <span class=""><i class="fas fa-map-signs"></i></span>
+                                <h3 class="align-self-center"><?= $countAlternatif ?></h3>
+                                <span class="align-self-center"><i class="fas fa-map-signs"></i></span>
                             </div>
                         </div>
                     </div>
@@ -34,10 +35,10 @@
                 <a href="<?= base_url('/hasil') ?>" class="text-decoration-none">
                     <div class="card border-0 shadow-lg mb-3" id="menu">
                         <div class="card-body">
-                            <h6 class="card-title align-self-center fw-bold">Data Hasil</h6>
+                            <p class="fs-6 align-self-center fw-bold">Data Hasil</p>
                             <div class="d-flex mt-3 justify-content-between">
-                                <h3>3</h3>
-                                <span class=""><i class="fas fa-poll"></i></span>
+                                <h3 class="align-self-center"><?= $countHasil ?></h3>
+                                <span class="align-self-center"><i class="fas fa-poll"></i></span>
                             </div>
                         </div>
                     </div>
@@ -47,10 +48,10 @@
                 <a href="<?= base_url('/users') ?>" class="text-decoration-none">
                     <div class="card border-0 shadow-lg mb-3" id="menu">
                         <div class="card-body">
-                            <h6 class="card-title align-self-center fw-bold">Data Users</h6>
+                            <p class="fs-6 align-self-center fw-bold">Data Users</p>
                             <div class="d-flex mt-3 justify-content-between">
-                                <h3>3</h3>
-                                <span class=""><i class="fas fa-user"></i></span>
+                                <h3 class="align-self-center"><?= $countUser ?></h3>
+                                <span class="align-self-center"><i class="fas fa-user"></i></span>
                             </div>
                         </div>
                     </div>
@@ -81,7 +82,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="col-xs-12 text-center">
-                            <h6>Grafik Layak/Tidak Layak Pertahun</h6>
+                            <p>Grafik Layak/Tidak Layak Pertahun</p>
                         </div>
                     </div>
                     <div class="col-md-3">

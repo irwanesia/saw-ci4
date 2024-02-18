@@ -202,15 +202,15 @@
                                 </td>
                                 <td><?= round($nilai_v, 3) ?></td>
                             </tr>
+                            <form id="formHasil" method="post">
+                                <?= csrf_field() ?>
+                                <input type="text" name="alternatif[]" value="<?= $nama_alternatif ?>">
+                                <input type="hidden" name="bulan[]" value="<?= $bulan ?>">
+                                <input type="hidden" name="tahun[]" value="<?= $tahun ?>">
+                                <input type="hidden" name="nilai[]" value="<?= $nilai_v ?>">
+                            </form>
                             <?php $no++; ?>
                         <?php endforeach ?>
-                        <form id="formHasil">
-                            <?= csrf_field() ?>
-                            <input type="hidden" name="alternatif" value="<?= $nama_alternatif ?>">
-                            <input type="hidden" name="bulan" value="<?= $bulan ?>">
-                            <input type="hidden" name="tahun" value="<?= $tahun ?>">
-                            <input type="hidden" name="nilai" value="<?= $nilai_v ?>">
-                        </form>
                     </tbody>
 
                 </table>
@@ -223,4 +223,5 @@
         Data tidak ada atau Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
     </div>
 <?php endif ?>
+
 <?= $this->endSection('content') ?>

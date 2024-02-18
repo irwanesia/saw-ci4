@@ -17,6 +17,7 @@ class Dashboard extends BaseController
     protected $penilaianAlternatif;
     protected $user;
     protected $hasil;
+    protected $dataForChart;
 
     public function __construct()
     {
@@ -30,6 +31,7 @@ class Dashboard extends BaseController
         $this->penilaianAlternatif = new PenilaianModel();
         $this->user = new UsersModel();
         $this->hasil = new HasilModel();
+        $this->dataForChart = new HasilModel();
     }
 
     public function index()
@@ -38,7 +40,14 @@ class Dashboard extends BaseController
 
         $data = [
             'title' => 'Dashboard',
-            'bulan' => $this->hasil->getDataByTahun($tahun)
+            'bulan' => $this->hasil->getDataByTahun($tahun),
+            'countKriteria' => $this->kriteria->countAllResults(),
+            'countSubKriteria' => $this->subKriteria->countAllResults(),
+            'countAlternatif' => $this->alternatif->countAllResults(),
+            'countPenilaianAlternatif' => $this->penilaianAlternatif->countAllResults(),
+            'countUser' => $this->user->countAllResults(),
+            'countHasil' => $this->hasil->countAllResults(),
+            'dataForChart' => json_encode($this->dataForChart)
         ];
         return view('dashboard', $data);
     }

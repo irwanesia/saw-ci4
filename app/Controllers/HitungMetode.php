@@ -49,18 +49,36 @@ class HitungMetode extends BaseController
         $dataPenilaian = $this->penilaian->getAllPenilaian($bulan, $tahun);
         $nilaiMaxMin = $this->penilaian->getNilaiMaxMin();
 
-        $data = [];
-        foreach ($dataPenilaian as $penilaian) {
-            $data[$penilaian['alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
-        }
-
-        // $nilaiMax = [];
+        $nilaiMax = [];
         foreach ($nilaiMaxMin as $nMax) {
             $nilaiMax[] = $nMax['nilaiMax'];
         }
         foreach ($nilaiMaxMin as $nMin) {
             $nilaiMin[] = $nMin['nilaiMin'];
         }
+
+        $data = [];
+        foreach ($dataPenilaian as $penilaian) {
+            $data[$penilaian['alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
+        }
+
+        // foreach($data as $nama_alternatif => $nilaiKriteria) {
+        //     foreach ($kriteria as $index => $key) {
+        //         $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
+        //         if ($nilai !== '-') {
+        //             // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
+        //             // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
+        //             if ($key['type'] == "Benefit") {
+        //                 $nilaiDiBagi = $nilai / $nilaiMax[$index];
+        //             } else {
+        //                 $nilaiDiBagi = $nilaiMin[$index] / $nilai;
+        //             }
+        //         } else {
+        //             $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan '-' sebagai output
+        //         }
+        //     }
+        // }
+
 
         return view('Perhitungan/index', [
             'title' => 'Perhitungan Metode SAW',
