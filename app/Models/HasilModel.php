@@ -14,7 +14,7 @@ class HasilModel extends Model
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_alternatif', 'bulan', 'tahun', 'nilai', 'status'];
+    protected $allowedFields = ['id_alternatif', 'id_bulan', 'id_tahun', 'nilai', 'status'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -31,5 +31,10 @@ class HasilModel extends Model
             $this->where('tahun', $tahun);
         }
         return $this->findAll();
+    }
+
+    public function simpanHasil($data)
+    {
+        return $this->insert($data);
     }
 }

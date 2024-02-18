@@ -13,8 +13,8 @@
                 <div class="card-body">
                     <select class="form-control" name="bulan" id="bulan">
                         <option value="#" disabled selected>-- Pilih Bulan --</option>
-                        <?php foreach ($dataBulan as $key => $bulan) : ?>
-                            <option value="<?= $key + 1 ?>"><?= $bulan ?></option>
+                        <?php foreach ($dataBulan as $key => $month) : ?>
+                            <option value="<?= $key + 1 ?>" <?= ($key + 1) == $bulan ? 'selected' : '' ?>><?= $month ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -23,8 +23,8 @@
                 <div class="card-body">
                     <select class="form-control" name="tahun" id="tahun">
                         <option value="#" disabled selected>-- Pilih Tahun --</option>
-                        <?php foreach ($dataTahun as $key => $tahun) : ?>
-                            <option value="<?= 2 . $key + 2 ?>" ><?= $tahun ?></option>
+                        <?php foreach ($dataTahun as $key => $year) : ?>
+                            <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -33,6 +33,10 @@
     </form>
 </div>
 
+<!-- notifikasi pesan -->
+<?php if (session()->getFlashdata('pesan')) : ?>
+    <?= session()->getFlashdata('pesan') ?>
+<?php endif ?>
 <!-- cek apakah ada data alternatif -->
 <?php if (!empty($alternatif)) : ?>
     <div class="card mt-4 shadow-sm">
@@ -40,9 +44,6 @@
             <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Data Aternatif</h6>
         </div>
         <div class="card-body m-2">
-            <?php if (session()->getFlashdata('pesan')) : ?>
-                <?= session()->getFlashdata('pesan') ?>
-            <?php endif ?>
             <div class="table-responsive">
                 <table id="myTable" class="table table-striped">
                     <thead>
@@ -61,6 +62,8 @@
                                 <td>
                                     <form action="/alternatif/edit/<?= $row['id_alternatif'] ?>" method="get" class="d-inline">
                                         <?= csrf_field() ?>
+                                        <input type="hidden" name="bulan" value="<?= $bulan ?>">
+                                        <input type="hidden" name="tahun" value="<?= $tahun ?>">
                                         <input type="hidden" name="_method" value="GET">
                                         <button type="submit" class="btn btn-sm btn-warning">Edit</button>
                                     </form>
@@ -80,7 +83,7 @@
     <!-- jika tidak ada data tampilkan pesan -->
 <?php else : ?>
     <div class="alert alert-info mt-5" role="alert">
-        Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
+        Data tidak ada atau Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
     </div>
 <?php endif ?>
 

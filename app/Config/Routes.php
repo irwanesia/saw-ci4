@@ -51,13 +51,20 @@ $routes->post('/alternatif/update/(:num)', 'Alternatif::update/$1');
 $routes->delete('/alternatif/hapus/(:num)', 'Alternatif::delete/$1');
 
 // route data penilaian
-$routes->get('/list-penilaian', 'Penilaian::index');
+$routes->get('/penilaian', 'Penilaian::index');
+$routes->get('/penilaian/periode/(:any)/(:any)', 'Penilaian::index/$1/$2');
 $routes->get('/penilaian/tambah/(:num)', 'Penilaian::tambah/$1');
 $routes->post('/penilaian/simpan/(:num)', 'Penilaian::simpan/$1');
 $routes->get('/penilaian/edit/(:num)', 'Penilaian::edit/$1');
 $routes->post('/penilaian/update/(:num)', 'Penilaian::update/$1');
 $routes->delete('/alternatif/hapus/(:num)', 'Alternatif::delete/$1');
 
-$routes->get('/hitung-saw', 'HitungMetode::index');
+// perhitungan
+$routes->get('/perhitungan', 'HitungMetode::index');
+$routes->get('/perhitungan/periode/(:any)/(:any)', 'HitungMetode::index/$1/$2');
+$routes->post('/perhitungan/simpan', 'HitungMetode::simpan');
 
 $routes->get('/hasil', 'Hasil::index');
+$routes->get('/hasil/periode/(:any)/(:any)', 'Hasil::index/$1/$2');
+
+// route hasil

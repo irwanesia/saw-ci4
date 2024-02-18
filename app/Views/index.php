@@ -66,7 +66,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-md-6">
-            <a href="<?= base_url('/list-penilaian') ?>" class="text-decoration-none">
+            <a href="<?= base_url('/penilaian') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -78,7 +78,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-md-6">
-            <a href="<?= base_url('/hitung-saw') ?>" class="text-decoration-none">
+            <a href="<?= base_url('/perhitungan') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">

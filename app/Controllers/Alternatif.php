@@ -17,10 +17,10 @@ class Alternatif extends BaseController
             // exit;
         }
         $this->alternatif = new AlternatifModel();
-        
+
         // membuat bulan untuk keperluan periode
         $this->dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    
+
         // membuat range tahun untuk keperluan periode
         $thnAwal = 2022;
         $thnAkhir = intval(date('Y'));
@@ -30,11 +30,13 @@ class Alternatif extends BaseController
             $this->dataTahun[] = $thnAwal + $i;
         }
     }
-    
+
     public function index($bulan = null, $tahun = null)
     {
         $data = [
             'title' => 'Data Alternatif',
+            'bulan' => $bulan,
+            'tahun' => $tahun,
             'dataBulan' => $this->dataBulan,
             'dataTahun' => $this->dataTahun,
             'alternatif' => $this->alternatif->getPeriode($bulan, $tahun) // Gunakan data alternatif berdasarkan periode
@@ -95,6 +97,8 @@ class Alternatif extends BaseController
             'title' => 'Edit Alternatif',
             'dataBulan' => $this->dataBulan,
             'dataTahun' => $this->dataTahun,
+            'bulan' => $this->request->getVar('bulan'),
+            'tahun' => $this->request->getVar('tahun'),
             'alternatif' => $this->alternatif->find($id),
             'validation' => \Config\Services::validation()
         ];

@@ -86,11 +86,13 @@ class PenilaianModel extends Model
             ->find();
     }
 
-    public function getAllPenilaian()
+    public function getAllPenilaian($bulan, $tahun)
     {
         $builder = $this->db->table('penilaian p');
         $builder->select('p.*, a.alternatif');
         $builder->join('alternatif a', 'p.id_alternatif = a.id_alternatif');
+        $builder->where('id_bulan', $bulan);
+        $builder->where('id_tahun', $tahun);
         $builder->orderBy('p.id_alternatif', 'ASC');
         $builder->orderBy('p.id_kriteria', 'ASC');
         $query = $builder->get();

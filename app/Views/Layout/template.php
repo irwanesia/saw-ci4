@@ -154,7 +154,6 @@
           data: {
             labels: ['Layak', 'Tidak Layak'],
             datasets: [{
-              label: 'My First Dataset',
               data: [50, 23],
               backgroundColor: [
                 'rgba(43,178,242)',
@@ -167,6 +166,7 @@
       </script>
 
       <script>
+        // alternatif
         document.getElementById('bulan').onchange = changePeriode;
         document.getElementById('tahun').onchange = changePeriode;
 
@@ -177,6 +177,51 @@
             window.location.href = `<?= base_url() ?>alternatif/periode/${bulan}/${tahun}`;
           }
         }
+      </script>
+      <script>
+        // penilaian
+        document.getElementById('bulanA').onchange = changePeriodeA;
+        document.getElementById('tahunA').onchange = changePeriodeA;
+
+        function changePeriodeA() {
+          var bulan = document.getElementById('bulanA').value;
+          var tahun = document.getElementById('tahunA').value;
+          if (bulan != '#' && tahun != '#') {
+            window.location.href = `<?= base_url() ?>penilaian/periode/${bulan}/${tahun}`;
+          }
+        }
+      </script>
+      <script>
+        // perhitungan
+        document.getElementById('bulanP').onchange = changePeriodeP;
+        document.getElementById('tahunP').onchange = changePeriodeP;
+
+        function changePeriodeP() {
+          var bulan = document.getElementById('bulanP').value;
+          var tahun = document.getElementById('tahunP').value;
+          if (bulan != '#' && tahun != '#') {
+            window.location.href = `<?= base_url() ?>perhitungan/periode/${bulan}/${tahun}`;
+          }
+        }
+      </script>
+      <script>
+        // hasil
+        document.getElementById('bulanH').onchange = changePeriodeH;
+        document.getElementById('tahunH').onchange = changePeriodeH;
+
+        function changePeriodeH() {
+          var bulan = document.getElementById('bulanH').value;
+          var tahun = document.getElementById('tahunH').value;
+          if (bulan != '#' && tahun != '#') {
+            window.location.href = `<?= base_url() ?>hasil/periode/${bulan}/${tahun}`;
+          }
+        }
+      </script>
+      <script>
+        // Submit semua form
+        // document.querySelectorAll('form').forEach(form => form.submit());
+        // Mengirim form secara otomatis
+        // document.getElementById('formHasil').submit();
       </script>
 </body>
 

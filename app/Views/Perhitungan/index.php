@@ -1,6 +1,39 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
+<div class="card mt-5 shadow-sm">
+    <!-- /.card-header -->
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Pilih Periode</h6>
+    </div>
+    <form id="periodeForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-body">
+                    <select class="form-control" name="bulanP" id="bulanP">
+                        <option value="#" disabled selected>-- Pilih Bulan --</option>
+                        <?php foreach ($dataBulan as $key => $month) : ?>
+                            <option value="<?= $key + 1 ?>" <?= ($key + 1) == $bulan ? 'selected' : '' ?>><?= $month ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-body">
+                    <select class="form-control" name="tahunP" id="tahunP">
+                        <option value="#" disabled selected>-- Pilih Tahun --</option>
+                        <?php foreach ($dataTahun as $key => $year) : ?>
+                            <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- cek apakah ada data alternatif -->
+<?php if (!empty($data)) : ?>
     <h5 class="mt-5">Perhitungan Metode SAW</h5>
 
     <div class="card mt-3 shadow-sm">
@@ -171,11 +204,23 @@
                             </tr>
                             <?php $no++; ?>
                         <?php endforeach ?>
+                        <form id="formHasil">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="alternatif" value="<?= $nama_alternatif ?>">
+                            <input type="hidden" name="bulan" value="<?= $bulan ?>">
+                            <input type="hidden" name="tahun" value="<?= $tahun ?>">
+                            <input type="hidden" name="nilai" value="<?= $nilai_v ?>">
+                        </form>
                     </tbody>
 
                 </table>
             </div>
         </div>
     </div>
-
+    <!-- jika tidak ada data tampilkan pesan -->
+<?php else : ?>
+    <div class="alert alert-info mt-5" role="alert">
+        Data tidak ada atau Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
+    </div>
+<?php endif ?>
 <?= $this->endSection('content') ?>

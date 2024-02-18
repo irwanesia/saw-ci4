@@ -13,6 +13,8 @@ class Penilaian extends BaseController
     protected $alternatif;
     protected $kriteria;
     protected $subKriteria;
+    protected $dataBulan;
+    protected $dataTahun;
 
     public function __construct()
     {
@@ -24,11 +26,23 @@ class Penilaian extends BaseController
         $this->alternatif = new AlternatifModel();
         $this->kriteria = new KriteriaModel();
         $this->subKriteria = new SubKriteriaModel();
+
+        // membuat bulan untuk keperluan periode
+        $this->dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+        // membuat range tahun untuk keperluan periode
+        $thnAwal = 2022;
+        $thnAkhir = intval(date('Y'));
+        $jumlahThn = $thnAkhir - $thnAwal;
+        $this->dataTahun = [];
+        for ($i = 0; $i <= $jumlahThn; $i++) {
+            $this->dataTahun[] = $thnAwal + $i;
+        }
     }
 
-    public function index()
+    public function index($bulan = null, $tahun = null)
     {
-        $alternatifList = $this->alternatif->findAll();
+        $alternatifList = $this->alternatif->getPeriode($bulan, $tahun);
         foreach ($alternatifList as $key => $alternatif) {
             // Memeriksa apakah sudah ada penilaian untuk alternatif ini
             $isPenilaianExists = $this->penilaian->where('id_alternatif', $alternatif['id_alternatif'])->countAllResults() > 0;
@@ -38,6 +52,10 @@ class Penilaian extends BaseController
         $data = [
             'title' => 'Penilaian Alternatif',
             'alternatif' => $alternatifList,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'dataBulan' => $this->dataBulan,
+            'dataTahun' => $this->dataTahun,
         ];
 
         return view('Penilaian/index', $data);
@@ -72,6 +90,8 @@ class Penilaian extends BaseController
             'idAlternatif' => $idAlternatif,
             'kriteria' => $kriteriaList,
             'subkriteriaData' => $subkriteriaData,
+            'bulan' => $this->request->getVar('bulan'),
+            'tahun' => $this->request->getVar('tahun'),
             'validation' => \Config\Services::validation()
         ];
         return view('Penilaian/tambah', $data);
@@ -105,7 +125,7 @@ class Penilaian extends BaseController
         $isipesan = '<script> alert("Berhasil ditambahkan!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/list-penilaian');
+        return redirect()->to('/penilaian');
     }
 
     public function edit($id)
@@ -145,6 +165,8 @@ class Penilaian extends BaseController
             'idAlternatif' => $idAlternatif,
             'kriteria' => $kriteriaList,
             'penilaianData' => $penilaianData,
+            'bulan' => $this->request->getVar('bulan'),
+            'tahun' => $this->request->getVar('tahun'),
             'validation' => \Config\Services::validation()
         ];
         return view('Penilaian/edit', $data);
@@ -182,6 +204,6 @@ class Penilaian extends BaseController
         $isipesan = '<script> alert("Penilaian alternatif berhasil diupdate!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/list-penilaian');
+        return redirect()->to('/penilaian');
     }
 }
