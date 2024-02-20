@@ -7,6 +7,7 @@ use App\Models\AlternatifModel;
 use App\Models\KriteriaModel;
 use App\Models\PenilaianModel;
 use App\Models\SubKriteriaModel;
+use App\Models\HasilModel;
 
 class HitungMetode extends BaseController
 {
@@ -17,6 +18,7 @@ class HitungMetode extends BaseController
     protected $subKriteria;
     protected $dataBulan;
     protected $dataTahun;
+    protected $hasil;
 
     public function __construct()
     {
@@ -29,6 +31,7 @@ class HitungMetode extends BaseController
         $this->alternatif = new AlternatifModel();
         $this->kriteria = new KriteriaModel();
         $this->subKriteria = new SubKriteriaModel();
+        $this->hasil = new HasilModel();
         // membuat bulan untuk keperluan periode
         $this->dataBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -59,26 +62,8 @@ class HitungMetode extends BaseController
 
         $data = [];
         foreach ($dataPenilaian as $penilaian) {
-            $data[$penilaian['alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
+            $data[$penilaian['id_alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
         }
-
-        // foreach($data as $nama_alternatif => $nilaiKriteria) {
-        //     foreach ($kriteria as $index => $key) {
-        //         $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
-        //         if ($nilai !== '-') {
-        //             // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
-        //             // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
-        //             if ($key['type'] == "Benefit") {
-        //                 $nilaiDiBagi = $nilai / $nilaiMax[$index];
-        //             } else {
-        //                 $nilaiDiBagi = $nilaiMin[$index] / $nilai;
-        //             }
-        //         } else {
-        //             $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan '-' sebagai output
-        //         }
-        //     }
-        // }
-
 
         return view('Perhitungan/index', [
             'title' => 'Perhitungan Metode SAW',
@@ -94,21 +79,49 @@ class HitungMetode extends BaseController
         ]);
     }
 
-    public function simpan()
+    public function simpanData()
     {
-        // Dapatkan array dari input
-        $alternatif = $this->request->getVar('alternatif');
-        $bulan = $this->request->getVar('bulan');
-        $tahun = $this->request->getVar('tahun');
-        $nilai = $this->request->getVar('nilai');
-        // Menyimpan setiap entry
-        $this->penilaian->save([
-            'alternatif' => $alternatif,
-            'bulan' => $bulan,
-            'tahun' => $tahun,
-            'nilai' => $nilai
-        ]);
+        // hapus jika data yg mau di input sudh ada di database
 
-        return redirect()->to('/perhitungan/periode/' . $bulan . '/' . $tahun);
+        $alternatif = $this->request->getVar('alternatif[]');
+        $bln = $this->request->getVar('bulan[]');
+        $thn = $this->request->getVar('tahun[]');
+        $nilai = $this->request->getVar('nilai[]');
+
+        // Asumsikan Anda mempunyai model yang sesuai untuk menyimpan data
+        for ($i = 0; $i < count($alternatif); $i++) {
+            $data = [
+                'id_alternatif' => $alternatif[$i],
+                'id_bulan' => $bln[$i],
+                'id_tahun' => $thn[$i],
+                'nilai' => $nilai[$i],
+            ];
+
+            // Panggil model untuk menyimpan data
+            // Menyimpan setiap entry
+            $this->hasil->save($data);
+        }
+
+        // Redirect atau kirim response sesuai kebutuhan
+        return redirect()->to('/perhitungan/periode/' . $bln[0] . '/' . $thn[0]);
     }
+
+
+    // public function simpan()
+    // {
+    //     // Dapatkan array dari input
+    //     $alternatif = $this->request->getVar('alternatif');
+    //     $bulan = $this->request->getVar('bulan');
+    //     $tahun = $this->request->getVar('tahun');
+    //     $nilai = $this->request->getVar('nilai');
+    //     // Menyimpan setiap entry
+    //     $this->penilaian->save([
+    //         'alternatif' => $alternatif,
+    //         'bulan' => $bulan,
+    //         'tahun' => $tahun,
+    //         'nilai' => $nilai
+    //     ]);
+
+    //     return redirect()->to('/perhitungan/periode/' . $bulan . '/' . $tahun);
+    // }
 }

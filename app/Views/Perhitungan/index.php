@@ -116,7 +116,7 @@
                     <thead class="bg-primary text-white">
                         <tr align="center">
                             <th width="5%" rowspan="2">No</th>
-                            <th>Nama Alternatif</th>
+                            <th>Alternatif</th>
                             <?php foreach ($kriteria as $key) : ?>
                                 <th><?= $key['kode_kriteria'] ?></th>
                             <?php endforeach ?>
@@ -171,50 +171,50 @@
                             <th>Nilai Preferensi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php $no = 1; ?>
-                        <?php foreach ($data as $nama_alternatif => $nilaiKriteria) : ?>
-                            <tr align="center">
-                                <td><?= $no; ?></td>
-                                <td align="left"><?= $nama_alternatif ?></td>
-                                <td align="left">
-                                    SUM
-                                    <?php $nilai_v = 0; ?>
-                                    <?php foreach ($kriteria as $index => $key) : ?>
-                                        <?php
-                                        $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
-                                        if ($nilai !== '-') {
-                                            // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
-                                            // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
-                                            if ($key['type'] == "Benefit") {
-                                                $nilaiDiBagi = $nilai / $nilaiMax[$index];
+                    <form id="formHasil" method="post" action="/perhitungan/simpan">
+                        <?= csrf_field() ?>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php foreach ($data as $id_alternatif => $nilaiKriteria) : ?>
+                                <tr align="center">
+                                    <td><?= $no; ?></td>
+                                    <td align="left"><?= $id_alternatif ?></td>
+                                    <td align="left">
+                                        SUM
+                                        <?php $nilai_v = 0; ?>
+                                        <?php foreach ($kriteria as $index => $key) : ?>
+                                            <?php
+                                            $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
+                                            if ($nilai !== '-') {
+                                                // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
+                                                // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
+                                                if ($key['type'] == "Benefit") {
+                                                    $nilaiDiBagi = $nilai / $nilaiMax[$index];
+                                                } else {
+                                                    $nilaiDiBagi = $nilaiMin[$index] / $nilai;
+                                                }
                                             } else {
-                                                $nilaiDiBagi = $nilaiMin[$index] / $nilai;
+                                                $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan '-' sebagai output
                                             }
-                                        } else {
-                                            $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan '-' sebagai output
-                                        }
-                                        $perkalianBobot = $key['bobot'] * $nilaiDiBagi;
-                                        $nilai_v += $perkalianBobot;
-                                        echo "(" . $key['bobot'] . " x " . round($nilaiDiBagi, 3) . ") ";
-                                        ?>
-                                    <?php endforeach ?>
-                                </td>
-                                <td><?= round($nilai_v, 3) ?></td>
-                            </tr>
-                            <form id="formHasil" method="post">
-                                <?= csrf_field() ?>
-                                <input type="text" name="alternatif[]" value="<?= $nama_alternatif ?>">
-                                <input type="hidden" name="bulan[]" value="<?= $bulan ?>">
-                                <input type="hidden" name="tahun[]" value="<?= $tahun ?>">
-                                <input type="hidden" name="nilai[]" value="<?= $nilai_v ?>">
-                            </form>
-                            <?php $no++; ?>
-                        <?php endforeach ?>
-                    </tbody>
-
+                                            $perkalianBobot = $key['bobot'] * $nilaiDiBagi;
+                                            $nilai_v += $perkalianBobot;
+                                            echo "(" . $key['bobot'] . " x " . round($nilaiDiBagi, 3) . ") ";
+                                            ?>
+                                        <?php endforeach ?>
+                                    </td>
+                                    <td><?= round($nilai_v, 3) ?></td>
+                                </tr>
+                                <input type="text" name="alternatif[]" value="<?= $id_alternatif ?>">
+                                <input type="text" name="bulan[]" value="<?= $bulan ?>">
+                                <input type="text" name="tahun[]" value="<?= $tahun ?>">
+                                <input type="text" name="nilai[]" value="<?= $nilai_v ?>">
+                                <?php $no++; ?>
+                            <?php endforeach ?>
+                        </tbody>
                 </table>
             </div>
+            <button class="btn btn-primary mt-3" type="submit">Simpan Semua Hasil</button>
+            </form>
         </div>
     </div>
     <!-- jika tidak ada data tampilkan pesan -->
