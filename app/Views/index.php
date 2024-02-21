@@ -41,7 +41,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-6 <?= $adaPilihan == '0' ? 'd-none' : '' ?>">
             <a href="<?= base_url('/sub-kriteria') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">

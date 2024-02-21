@@ -62,10 +62,10 @@ $routes->delete('/alternatif/hapus/(:num)', 'Alternatif::delete/$1');
 // perhitungan
 $routes->get('/perhitungan', 'HitungMetode::index');
 $routes->get('/perhitungan/periode/(:any)/(:any)', 'HitungMetode::index/$1/$2');
-$routes->get('/perhitungan/periode/(:any)/(:any)', 'HitungMetode::index/$1/$2');
 $routes->post('/perhitungan/simpan', 'HitungMetode::simpanData');
 
+// route hasil
 $routes->get('/hasil', 'Hasil::index');
 $routes->get('/hasil/periode/(:any)/(:any)', 'Hasil::index/$1/$2');
-
-// route hasil
+$routes->get('/hasil/cetak/periode/(:any)/(:any)', 'Hasil::cetak/$1/$2');
+$routes->get('/hasil/hapus/periode/(:any)/(:any)', 'Hasil::hapus/$1/$2');

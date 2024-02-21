@@ -4,7 +4,7 @@
 <div class="card mt-5 shadow-sm">
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Pilih Periode</h6>
+        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
     </div>
     <form id="periodeForm">
         <div class="row">

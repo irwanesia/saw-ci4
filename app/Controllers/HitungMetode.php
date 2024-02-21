@@ -56,6 +56,7 @@ class HitungMetode extends BaseController
         foreach ($nilaiMaxMin as $nMax) {
             $nilaiMax[] = $nMax['nilaiMax'];
         }
+        $nilaiMin = [];
         foreach ($nilaiMaxMin as $nMin) {
             $nilaiMin[] = $nMin['nilaiMin'];
         }
@@ -81,47 +82,42 @@ class HitungMetode extends BaseController
 
     public function simpanData()
     {
-        // hapus jika data yg mau di input sudh ada di database
-
         $alternatif = $this->request->getVar('alternatif[]');
         $bln = $this->request->getVar('bulan[]');
         $thn = $this->request->getVar('tahun[]');
         $nilai = $this->request->getVar('nilai[]');
 
-        // Asumsikan Anda mempunyai model yang sesuai untuk menyimpan data
+        // Inisialisasi kode unik di sini, sehingga setiap baris data dalam proses ini akan memiliki kode yang sama
+        $kodeUnik = uniqid('hasil-', true);
+
         for ($i = 0; $i < count($alternatif); $i++) {
+            // Cek apakah data sudah ada di database
+            $existingData = $this->hasil->where([
+                'id_alternatif' => $alternatif[$i],
+                'id_bulan' => $bln[$i],
+                'id_tahun' => $thn[$i]
+            ])->first();
+
+
             $data = [
+                'kode_hasil' => $kodeUnik,
                 'id_alternatif' => $alternatif[$i],
                 'id_bulan' => $bln[$i],
                 'id_tahun' => $thn[$i],
                 'nilai' => $nilai[$i],
             ];
 
-            // Panggil model untuk menyimpan data
-            // Menyimpan setiap entry
-            $this->hasil->save($data);
+            if ($existingData) {
+                // Jika data sudah ada, lakukan update
+                $this->hasil->update($existingData['id_hasil'], $data); // Pastikan 'id' adalah nama primary key dari tabel hasil
+                session()->setFlashdata('pesan', 'Maaf, Data perhitungan sudah tersimpan di database!');
+            } else {
+                // Jika data belum ada, lakukan insert
+                $this->hasil->save($data);
+                session()->setFlashdata('pesan', 'Data perhitungan berhasil disimpan!');
+            }
         }
 
-        // Redirect atau kirim response sesuai kebutuhan
         return redirect()->to('/perhitungan/periode/' . $bln[0] . '/' . $thn[0]);
     }
-
-
-    // public function simpan()
-    // {
-    //     // Dapatkan array dari input
-    //     $alternatif = $this->request->getVar('alternatif');
-    //     $bulan = $this->request->getVar('bulan');
-    //     $tahun = $this->request->getVar('tahun');
-    //     $nilai = $this->request->getVar('nilai');
-    //     // Menyimpan setiap entry
-    //     $this->penilaian->save([
-    //         'alternatif' => $alternatif,
-    //         'bulan' => $bulan,
-    //         'tahun' => $tahun,
-    //         'nilai' => $nilai
-    //     ]);
-
-    //     return redirect()->to('/perhitungan/periode/' . $bulan . '/' . $tahun);
-    // }
 }

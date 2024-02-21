@@ -46,7 +46,7 @@ class Dashboard extends BaseController
             'countAlternatif' => $this->alternatif->countAllResults(),
             'countPenilaianAlternatif' => $this->penilaianAlternatif->countAllResults(),
             'countUser' => $this->user->countAllResults(),
-            'countHasil' => $this->hasil->countAllResults(),
+            'countHasil' => $this->hasil->getCountHasilUnik(),
             'dataForChart' => json_encode($this->dataForChart)
         ];
         return view('dashboard', $data);
@@ -56,13 +56,7 @@ class Dashboard extends BaseController
     {
         $data = [
             'title' => 'Simple Additive Weighting',
-            'countKriteria' => $this->kriteria->countAllResults(),
-            'countSubKriteria' => $this->subKriteria->countAllResults(),
-            'countAlternatif' => $this->alternatif->countAllResults(),
-            'countPenilaianAlternatif' => $this->penilaianAlternatif->countAllResults(),
-            'countUser' => $this->user->countAllResults(),
-            'countHasil' => $this->hasil->countAllResults(),
-
+            'adaPilihan' => $this->kriteria->getPilihanSubKriteria(),
         ];
         return view('index', $data);
     }

@@ -52,4 +52,14 @@ class KriteriaModel extends Model
 
         return $newKode;
     }
+
+    public function getPilihanSubKriteria()
+    {
+        $builder = $this->db->table('kriteria');
+        // Gunakan COUNT(DISTINCT column_name) untuk menghitung jumlah nilai unik
+        $builder->select('ada_pilihan as pilihan');
+        $query = $builder->get();
+
+        return $query->getRow()->pilihan;
+    }
 }

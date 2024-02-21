@@ -102,6 +102,8 @@ class Penilaian extends BaseController
         // Dapatkan array dari input
         $idKriteria = $this->request->getVar('idKriteria[]');
         $nilai = $this->request->getVar('nilai[]');
+        $bulan = $this->request->getVar('bulan');
+        $tahun = $this->request->getVar('tahun');
 
         // Melakukan validasi untuk setiap elemen dalam array
         foreach ($idKriteria as $index => $value) {
@@ -125,7 +127,7 @@ class Penilaian extends BaseController
         $isipesan = '<script> alert("Berhasil ditambahkan!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/penilaian');
+        return redirect()->to('/penilaian/periode/' . $bulan . '/' . $tahun);
     }
 
     public function edit($id)

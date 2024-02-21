@@ -4,7 +4,12 @@
 <div class="card mt-5 shadow-sm">
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Pilih Periode</h6>
+        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
+        <div>
+            <a class="btn btn-sm btn-primary align-self-center <?= $bulan == null ? 'd-none' : ''; ?>" href="/hasil/periode/<?= $bulan . '/' . $tahun; ?>">
+                <i class="fa fa-eye" aria-hidden="true"></i> Lihat Hasil
+            </a>
+        </div>
     </div>
     <form id="periodeForm">
         <div class="row">
@@ -35,15 +40,16 @@
 <!-- cek apakah ada data alternatif -->
 <?php if (!empty($data)) : ?>
     <h5 class="mt-5">Perhitungan Metode SAW</h5>
-
+    <?php if (session()->getFlashdata('pesan')) : ?>
+        <script>
+            alert("<?= session()->getFlashdata('pesan'); ?>");
+        </script>
+    <?php endif; ?>
     <div class="card mt-3 shadow-sm">
         <div class="card-header d-flex justify-content-between">
             <h6 class="text-muted"># Bobot Preferensi (W)</h6>
         </div>
         <div class="card-body m-2">
-            <?php if (session()->getFlashdata('pesan')) : ?>
-                <?= session()->getFlashdata('pesan') ?>
-            <?php endif ?>
             <div class="table-responsive">
                 <table class="table table-striped" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
@@ -71,9 +77,6 @@
             <h6 class="text-muted"># Matriks Keputusan (X)</h6>
         </div>
         <div class="card-body m-2">
-            <?php if (session()->getFlashdata('pesan')) : ?>
-                <?= session()->getFlashdata('pesan') ?>
-            <?php endif ?>
             <div class="table-responsive">
                 <table class="table table-striped" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
@@ -108,9 +111,6 @@
             <h6 class="text-muted"># Matriks Ternormalisasi (R)</h6>
         </div>
         <div class="card-body m-2">
-            <?php if (session()->getFlashdata('pesan')) : ?>
-                <?= session()->getFlashdata('pesan') ?>
-            <?php endif ?>
             <div class="table-responsive">
                 <table class="table table-striped" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
@@ -158,9 +158,6 @@
             <h6 class="text-muted"># Perhitungan/Nilai Preferensi (V)</h6>
         </div>
         <div class="card-body m-2">
-            <?php if (session()->getFlashdata('pesan')) : ?>
-                <?= session()->getFlashdata('pesan') ?>
-            <?php endif ?>
             <div class="table-responsive">
                 <table class="table table-striped" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
@@ -204,19 +201,20 @@
                                     </td>
                                     <td><?= round($nilai_v, 3) ?></td>
                                 </tr>
-                                <input type="text" name="alternatif[]" value="<?= $id_alternatif ?>">
-                                <input type="text" name="bulan[]" value="<?= $bulan ?>">
-                                <input type="text" name="tahun[]" value="<?= $tahun ?>">
-                                <input type="text" name="nilai[]" value="<?= $nilai_v ?>">
+                                <input type="hidden" name="alternatif[]" value="<?= $id_alternatif ?>">
+                                <input type="hidden" name="bulan[]" value="<?= $bulan ?>">
+                                <input type="hidden" name="tahun[]" value="<?= $tahun ?>">
+                                <input type="hidden" name="nilai[]" value="<?= $nilai_v ?>">
                                 <?php $no++; ?>
                             <?php endforeach ?>
                         </tbody>
                 </table>
             </div>
-            <button class="btn btn-primary mt-3" type="submit">Simpan Semua Hasil</button>
-            </form>
         </div>
     </div>
+    <button class="btn btn-primary mt-3" type="submit">Simpan Hasil Perhitungan</button>
+    </form>
+
     <!-- jika tidak ada data tampilkan pesan -->
 <?php else : ?>
     <div class="alert alert-info mt-5" role="alert">

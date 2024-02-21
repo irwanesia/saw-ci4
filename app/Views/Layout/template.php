@@ -217,12 +217,27 @@
           }
         }
       </script>
+
+      <!-- popup confirm perhitungan -->
       <script>
-        // Submit semua form
-        // document.querySelectorAll('form').forEach(form => form.submit());
-        // Mengirim form secara otomatis
-        // document.getElementById('formHasil').submit();
+        $(document).ready(function() {
+          // Ketika form hendak disubmit
+          $('#formHasil').on('submit', function(e) {
+            // Mencegah form disubmit secara default
+            e.preventDefault();
+
+            // Tampilkan alert konfirmasi
+            var confirmSave = confirm("Apakah Anda yakin ingin menyimpan hasil perhitungan?");
+
+            if (confirmSave) {
+              // Jika pengguna klik "OK", submit form
+              this.submit();
+            }
+            // Jika pengguna klik "Cancel", tidak terjadi apa-apa
+          });
+        });
       </script>
+
 </body>
 
 </html>

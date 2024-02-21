@@ -9,6 +9,8 @@
         </a>
     </div>
     <form action="/penilaian/simpan/<?= $idAlternatif['id_alternatif'] ?>" method="post">
+        <input type="hidden" name="bulan" value="<?= $bulan ?>">
+        <input type="hidden" name="tahun" value="<?= $tahun ?>">
         <?= csrf_field() ?>
         <div class="card-body px-5 py-4 mb-2">
             <div class="row">

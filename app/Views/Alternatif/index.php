@@ -4,8 +4,8 @@
 <div class="card mt-5 shadow-sm">
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Pilih Periode</h6>
-        <a href="<?= base_url('/alternatif/tambah') ?>" class="btn btn-sm btn-primary">+ Tambah Alternatif</a>
+        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
+        <a href="<?= base_url('/alternatif/tambah') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
     </div>
     <form id="periodeForm">
         <div class="row">
