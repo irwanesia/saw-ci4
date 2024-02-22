@@ -12,11 +12,6 @@ class Hasil extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
-
         $this->hasil = new HasilModel();
 
         // membuat bulan untuk keperluan periode
@@ -34,6 +29,13 @@ class Hasil extends BaseController
 
     public function index($bulan = null, $tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Data Hasil',
             'bulan' => $bulan,
@@ -47,6 +49,13 @@ class Hasil extends BaseController
 
     public function cetak($id_bulan = null, $id_tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $this->subKriteria->delete($id);
 
         // pesan berhasil didelete
@@ -58,6 +67,13 @@ class Hasil extends BaseController
 
     public function hapus($id_bulan = null, $id_tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // Pastikan $id_bulan dan $id_tahun tidak null
         if ($id_bulan !== null && $id_tahun !== null) {
             // Gunakan where clause untuk kondisi spesifik sebelum delete

@@ -5,8 +5,11 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/', 'Dashboard::home');
+$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/dashboard/pieChart', 'Dashboard::pieChart');
+$routes->get('/dashboard/barChart/(:any)', 'Dashboard::barChart/$i');
+$routes->get('/dashboard/chart/periode/(:any)', 'Dashboard::index/$1');
 
 // login
 $routes->get('/login', 'Auth::index');

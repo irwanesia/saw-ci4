@@ -10,15 +10,18 @@ class Users extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
         $this->users = new UsersModel();
     }
 
     public function index()
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Data Users',
             'users' => $this->users->findAll()
@@ -28,6 +31,13 @@ class Users extends BaseController
 
     public function tambah()
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // session dipindahkan ke basecontroller
         $data = [
             'title' => 'Form Register User',
@@ -87,6 +97,13 @@ class Users extends BaseController
 
     public function edit($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Edit Users',
             'user' => $this->users->find($id),
@@ -147,6 +164,13 @@ class Users extends BaseController
 
     public function delete($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $this->users->delete($id);
 
         // pesan berhasil didelete

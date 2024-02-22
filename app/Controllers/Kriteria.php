@@ -12,16 +12,19 @@ class Kriteria extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
         $this->kriteria = new KriteriaModel();
         $this->subKriteria = new SubKriteriaModel();
     }
 
     public function index()
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // Kirim data ke view
         return view('Kriteria/index', [
             'title' => 'Data Kriteria',
@@ -36,6 +39,13 @@ class Kriteria extends BaseController
 
     public function tambah()
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // session dipindahkan ke basecontroller
         $data = [
             'title' => 'Tambah Data Kriteria',
@@ -77,6 +87,13 @@ class Kriteria extends BaseController
 
     public function edit($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Edit Kriteria',
             'kriteria' => $this->kriteria->find($id),
@@ -119,6 +136,13 @@ class Kriteria extends BaseController
 
     public function delete($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $this->kriteria->delete($id);
 
         // pesan berhasil didelete

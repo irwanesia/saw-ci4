@@ -22,10 +22,6 @@ class HitungMetode extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
         $this->getNilai = new HitungMetodeModel();
         $this->penilaian = new PenilaianModel();
         $this->alternatif = new AlternatifModel();
@@ -47,6 +43,12 @@ class HitungMetode extends BaseController
 
     public function index($bulan = null, $tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
 
         $kriteria = $this->penilaian->getDistinctKriteria();
         $dataPenilaian = $this->penilaian->getAllPenilaian($bulan, $tahun);
@@ -63,7 +65,8 @@ class HitungMetode extends BaseController
 
         $data = [];
         foreach ($dataPenilaian as $penilaian) {
-            $data[$penilaian['id_alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
+            // $data[$penilaian['id_alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
+            $data[$penilaian['alternatif']][$penilaian['id_kriteria']] = $penilaian['nilai'];
         }
 
         return view('Perhitungan/index', [
@@ -93,18 +96,24 @@ class HitungMetode extends BaseController
         for ($i = 0; $i < count($alternatif); $i++) {
             // Cek apakah data sudah ada di database
             $existingData = $this->hasil->where([
-                'id_alternatif' => $alternatif[$i],
+                'alternatif' => $alternatif[$i],
                 'id_bulan' => $bln[$i],
                 'id_tahun' => $thn[$i]
             ])->first();
 
+            if ($nilai[$i] >= 0.8) {
+                $status = "Layak";
+            } else {
+                $status = "Tidak Layak";
+            }
 
             $data = [
                 'kode_hasil' => $kodeUnik,
-                'id_alternatif' => $alternatif[$i],
+                'alternatif' => $alternatif[$i],
                 'id_bulan' => $bln[$i],
                 'id_tahun' => $thn[$i],
                 'nilai' => $nilai[$i],
+                'status' => $status,
             ];
 
             if ($existingData) {

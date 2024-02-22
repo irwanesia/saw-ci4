@@ -3,7 +3,6 @@
 <?= $this->section('content') ?>
 <div class="row mt-5 mb-3">
     <div class="col-md-9">
-        <?php  var_dump($dataForChart) ?>
         <div class="row">
             <div class="col-xl-4 col-md-6">
                 <a href="<?= base_url('/kriteria') ?>" class="text-decoration-none">
@@ -11,7 +10,7 @@
                         <div class="card-body">
                             <p class="fs-6 align-self-center fw-bold">Data Kriteria</p>
                             <div class="d-flex mt-3 justify-content-between">
-                            <h3 class="align-self-center"><?= $countKriteria ?></h3>
+                                <h3 class="align-self-center"><?= $countKriteria ?></h3>
                                 <span class="align-self-center"><i class="fas fa-clipboard"></i></span>
                             </div>
                         </div>
@@ -70,28 +69,31 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-3">
-                        <form action="">
-                            <select name="tahun" id="" class="form-select" aria-label="Default select example">
-                                <option value="#" disabled selected>-Pilih Tahun-</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-xs-12 text-center">
-                            <p>Grafik Layak/Tidak Layak Pertahun</p>
+                <form id="periodeForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card-body">
+                                <select class="form-control" name="grafikTahun" id="grafikTahun">
+                                    <option value="#" disabled selected>-- Pilih Tahun --</option>
+                                    <?php foreach ($dataTahun as $key => $year) : ?>
+                                        <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
+                </form>
+                <div class="col-md-6">
+                    <div class="col-xs-12 text-center">
+                        <p>Grafik Layak/Tidak Layak Pertahun</p>
                     </div>
                 </div>
-                <canvas class="mt-5" id="barChart"></canvas>
+                <div class="col-md-3">
+                </div>
             </div>
+            <canvas class="mt-5" id="barChart"></canvas>
         </div>
     </div>
+</div>
 </div>
 
 <?= $this->endSection('content') ?>

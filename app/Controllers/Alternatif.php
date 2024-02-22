@@ -12,10 +12,6 @@ class Alternatif extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
         $this->alternatif = new AlternatifModel();
 
         // membuat bulan untuk keperluan periode
@@ -33,6 +29,13 @@ class Alternatif extends BaseController
 
     public function index($bulan = null, $tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Data Alternatif',
             'bulan' => $bulan,
@@ -51,7 +54,13 @@ class Alternatif extends BaseController
 
     public function tambah()
     {
-        // session dipindahkan ke basecontroller
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Tambah Data Alternatif',
             'dataBulan' => $this->dataBulan,
@@ -93,6 +102,13 @@ class Alternatif extends BaseController
 
     public function edit($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Edit Alternatif',
             'dataBulan' => $this->dataBulan,
@@ -138,6 +154,13 @@ class Alternatif extends BaseController
 
     public function delete($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $this->alternatif->delete($id);
 
         // pesan berhasil didelete

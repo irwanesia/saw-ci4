@@ -18,10 +18,6 @@ class Penilaian extends BaseController
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
         $this->penilaian = new PenilaianModel();
         $this->alternatif = new AlternatifModel();
         $this->kriteria = new KriteriaModel();
@@ -42,6 +38,13 @@ class Penilaian extends BaseController
 
     public function index($bulan = null, $tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $alternatifList = $this->alternatif->getPeriode($bulan, $tahun);
         foreach ($alternatifList as $key => $alternatif) {
             // Memeriksa apakah sudah ada penilaian untuk alternatif ini
@@ -63,6 +66,13 @@ class Penilaian extends BaseController
 
     public function tambah($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // $ambil data id alternatif
         $idAlternatif = $this->alternatif->find($id);
 
@@ -132,6 +142,13 @@ class Penilaian extends BaseController
 
     public function edit($id)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         // $ambil data id alternatif
         $idAlternatif = $this->alternatif->find($id);
 

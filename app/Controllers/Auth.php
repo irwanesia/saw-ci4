@@ -41,7 +41,7 @@ class Auth extends BaseController
                     'id_user' => $user['id_user'], // Harusnya mengambil dari $user bukan $data
                     'username' => $user['username'], // Ini juga, untuk memastikan data yang disimpan sesuai dengan yang ada di database
                     'role' => $user['role'], // Pastikan 'role' ini ada di tabel user Anda
-                    'isLoggedIn' => TRUE
+                    'login' => TRUE
                 ];
                 $this->session->set($ses_data);
                 return redirect()->to('/');

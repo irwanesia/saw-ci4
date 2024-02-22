@@ -58,7 +58,7 @@
                                                                 <td><?= $no++ ?></td>
                                                                 <td><?= $row['alternatif'] ?></td>
                                                                 <td><?= $row['nilai'] ?></td>
-                                                                <td class="fw-bold text-danger"><?= $row['nilai'] >= 0.8 ? 'Layak' : 'Tidak Layak' ?></td>
+                                                                <td class="fw-bold text-danger"><?= $row['status'] ?></td>
                                                         </tr>
                                                 <?php endforeach ?>
                                         </tbody>

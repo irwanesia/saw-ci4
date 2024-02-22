@@ -122,49 +122,96 @@
             }
           });
         });
-
-        const barChart = document.getElementById('barChart');
-
-        new Chart(barChart, {
-          type: 'bar',
-          data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Augt', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-              label: 'Layak',
-              data: [3, 10, 3, 5, 2, 3, 7, 11, 3, 5, 2, 3], // Contoh data untuk "Layak"
-              backgroundColor: 'rgba(43,178,242)', // Warna hijau muda
-            }, {
-              label: 'Tidak Layak',
-              data: [5, 6, 7, 2, 5, 8, 4, 2, 5, 3, 6, 7], // Contoh data untuk "Tidak Layak"
-              backgroundColor: 'rgba(235,35,50)', // Warna merah muda
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-
-        const pieChart = document.getElementById('pieChart');
-        new Chart(pieChart, {
-          type: 'pie',
-          data: {
-            labels: ['Layak', 'Tidak Layak'],
-            datasets: [{
-              data: [50, 23],
-              backgroundColor: [
-                'rgba(43,178,242)',
-                'rgba(235,35,50)'
-              ],
-              hoverOffset: 4
-            }]
-          }
-        });
       </script>
 
+      <script>
+        // Contoh URL API
+        const barApiUrl = '<?= site_url('dashboard/barChart/(:any)') ?>';
+
+        fetch(barApiUrl)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // Misalkan response dari API adalah objek dengan properti 'layak' dan 'tidakLayak'
+            const layak = data.jumlah_layak;
+            const tidakLayak = data.jumlah_tidak_layak;
+
+            const barChart = document.getElementById('barChart');
+
+            new Chart(barChart, {
+              type: 'bar',
+              data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Augt', 'Sept', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                  label: 'Layak',
+                  data: [3, 10, 3, 5, 2, 3, 7, 11, 3, 5, 2, 3], // Contoh data untuk "Layak"
+                  backgroundColor: 'rgba(43,178,242)', // Warna hijau muda
+                }, {
+                  label: 'Tidak Layak',
+                  data: [5, 6, 7, 2, 5, 8, 4, 2, 5, 3, 6, 7], // Contoh data untuk "Tidak Layak"
+                  backgroundColor: 'rgba(235,35,50)', // Warna merah muda
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      </script>
+
+      <script>
+        // Contoh URL API
+        const pieApiUrl = '<?= site_url('dashboard/pieChart') ?>';
+
+        fetch(pieApiUrl)
+          .then(response => response.json())
+          .then(data => {
+            // Misalkan response dari API adalah objek dengan properti 'layak' dan 'tidakLayak'
+            const layak = data.jumlah_layak;
+            const tidakLayak = data.jumlah_tidak_layak;
+
+            // Jumlahkan total untuk mendapatkan persentase
+            const total = layak + tidakLayak;
+            const layakPersen = (layak / total * 100).toFixed(2); // Menggunakan toFixed(2) untuk membatasi dua angka di belakang koma
+            const tidakLayakPersen = (tidakLayak / total * 100).toFixed(2);
+
+            const pieChart = document.getElementById('pieChart');
+            new Chart(pieChart, {
+              type: 'pie',
+              data: {
+                labels: ['Layak', 'Tidak Layak'],
+                datasets: [{
+                  data: [layakPersen, tidakLayakPersen],
+                  backgroundColor: [
+                    'rgba(43,178,242)',
+                    'rgba(235,35,50)'
+                  ],
+                  hoverOffset: 4
+                }]
+              },
+              options: {
+                tooltips: {
+                  callbacks: {
+                    label: function(tooltipItem, data) {
+                      let label = data.labels[tooltipItem.index] || '';
+                      if (label) {
+                        label += ': ';
+                      }
+                      label += data.datasets[0].data[tooltipItem.index] + '%';
+                      return label;
+                    }
+                  }
+                }
+              }
+            });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      </script>
       <script>
         // alternatif
         document.getElementById('bulan').onchange = changePeriode;
@@ -217,6 +264,7 @@
           }
         }
       </script>
+
 
       <!-- popup confirm perhitungan -->
       <script>

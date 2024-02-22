@@ -18,13 +18,11 @@ class Dashboard extends BaseController
     protected $user;
     protected $hasil;
     protected $dataForChart;
+    protected $dataTahun;
 
     public function __construct()
     {
-        if (session()->get('login') != "login") {
-            // echo 'Access denied, Klik <a href="/login">login<a> untuk masuk kembali..';
-            // exit;
-        }
+
         $this->kriteria = new KriteriaModel();
         $this->subKriteria = new subKriteriaModel();
         $this->alternatif = new AlternatifModel();
@@ -32,10 +30,26 @@ class Dashboard extends BaseController
         $this->user = new UsersModel();
         $this->hasil = new HasilModel();
         $this->dataForChart = new HasilModel();
+
+        // membuat range tahun untuk keperluan periode
+        $thnAwal = 2022;
+        $thnAkhir = intval(date('Y'));
+        $jumlahThn = $thnAkhir - $thnAwal;
+        $this->dataTahun = [];
+        for ($i = 0; $i <= $jumlahThn; $i++) {
+            $this->dataTahun[] = $thnAwal + $i;
+        }
     }
 
-    public function index()
+    public function index($tahun = null)
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $tahun = $this->request->getVar('tahun');
 
         $data = [
@@ -47,17 +61,37 @@ class Dashboard extends BaseController
             'countPenilaianAlternatif' => $this->penilaianAlternatif->countAllResults(),
             'countUser' => $this->user->countAllResults(),
             'countHasil' => $this->hasil->getCountHasilUnik(),
-            'dataForChart' => json_encode($this->dataForChart)
+            'tahun' => $tahun,
+            'dataTahun' => $this->dataTahun,
         ];
         return view('dashboard', $data);
     }
 
     public function home()
     {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
         $data = [
             'title' => 'Simple Additive Weighting',
             'adaPilihan' => $this->kriteria->getPilihanSubKriteria(),
         ];
         return view('index', $data);
+    }
+
+    public function pieChart()
+    {
+        $chartData = $this->hasil->getPieChart();
+        return $this->response->setJSON($chartData);
+    }
+
+    public function barChart($tahun)
+    {
+        $chartData = $this->hasil->getBarChart($tahun);
+        return $this->response->setJSON($chartData);
     }
 }
