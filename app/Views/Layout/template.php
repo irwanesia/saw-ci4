@@ -118,6 +118,7 @@
             success: function(hasil) {
               // alert(hasil);
               var obj = $.parseJSON(hasil);
+              console.log(obj);
               $('#kodeKriteria').val(obj);
             }
           });
@@ -125,43 +126,58 @@
       </script>
 
       <script>
-        // Contoh URL API
-        const barApiUrl = '<?= site_url('dashboard/barChart/(:any)') ?>';
+        document.getElementById('grafikTahun').addEventListener('change', function() {
+          const tahun = this.value;
+          const barApiUrl = `<?= site_url('dashboard/barChart/') ?>${tahun}`;
+          // console.log(barApiUrl);
 
-        fetch(barApiUrl)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            // Misalkan response dari API adalah objek dengan properti 'layak' dan 'tidakLayak'
-            const layak = data.jumlah_layak;
-            const tidakLayak = data.jumlah_tidak_layak;
+          fetch(barApiUrl)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              // Asumsikan data yang dikembalikan adalah array dengan objek untuk setiap bulan
+              // yang memiliki properti 'layak' dan 'tidak_layak'
+              const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+              const dataLayak = labels.map(label => {
+                const monthIndex = labels.indexOf(label) + 1;
+                const monthData = data.find(d => parseInt(d.id_bulan) === monthIndex);
+                return monthData ? monthData.layak : 0;
+              });
+              const dataTidakLayak = labels.map(label => {
+                const monthIndex = labels.indexOf(label) + 1;
+                const monthData = data.find(d => parseInt(d.id_bulan) === monthIndex);
+                return monthData ? monthData.tidak_layak : 0;
+              });
 
-            const barChart = document.getElementById('barChart');
-
-            new Chart(barChart, {
-              type: 'bar',
-              data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Augt', 'Sept', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                  label: 'Layak',
-                  data: [3, 10, 3, 5, 2, 3, 7, 11, 3, 5, 2, 3], // Contoh data untuk "Layak"
-                  backgroundColor: 'rgba(43,178,242)', // Warna hijau muda
-                }, {
-                  label: 'Tidak Layak',
-                  data: [5, 6, 7, 2, 5, 8, 4, 2, 5, 3, 6, 7], // Contoh data untuk "Tidak Layak"
-                  backgroundColor: 'rgba(235,35,50)', // Warna merah muda
-                }]
-              },
-              options: {
-                scales: {
-                  y: {
-                    beginAtZero: true
+              const barChartElement = document.getElementById('barChart');
+              if (window.barChartInstance) {
+                window.barChartInstance.destroy();
+              }
+              window.barChartInstance = new Chart(barChartElement, {
+                type: 'bar',
+                data: {
+                  labels: labels,
+                  datasets: [{
+                    label: 'Layak',
+                    data: dataLayak,
+                    backgroundColor: 'rgba(43,178,242)',
+                  }, {
+                    label: 'Tidak Layak',
+                    data: dataTidakLayak,
+                    backgroundColor: 'rgba(235,35,50)',
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
                   }
                 }
-              }
-            });
-          })
-          .catch(error => console.error('Error fetching data:', error));
+              });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        });
       </script>
 
       <script>

@@ -84,39 +84,22 @@ class HasilModel extends Model
     // untuk bar chart
     public function getBarChart($tahun)
     {
-        $builder = $this->db->table('hasil');
-
-        // Menghitung jumlah 'layak'
-        $builder->select('id_bulan, COUNT(*) as jumlah_layak');
-        $builder->where('status', 'layak');
-        $builder->where('id_tahun', $tahun);
-        $builder->groupBy('id_bulan');
-        $queryLayak = $builder->get();
-        $hasilLayak = $queryLayak->getResultArray();
-
-        // Reset Query Builder untuk query berikutnya
-        $builder->resetQuery();
-
-        // Menghitung jumlah 'tidak layak'
-        $builder->select('id_bulan, COUNT(*) as jumlah_tidak_layak');
-        $builder->where('status', 'tidak layak');
-        $builder->where('id_tahun', $tahun);
-        $builder->groupBy('id_bulan');
-        $queryTidakLayak = $builder->get();
-        $hasilTidakLayak = $queryTidakLayak->getResultArray();
-
-        // Menggabungkan hasil layak dan tidak layak
-        // Asumsi: setiap bulan selalu ada data, baik layak maupun tidak layak
-        $hasilGabungan = [];
-        foreach ($hasilLayak as $layak) {
-            $hasilGabungan[$layak['id_bulan']]['layak'] = $layak['jumlah_layak'];
-        }
-        foreach ($hasilTidakLayak as $tidakLayak) {
-            $hasilGabungan[$tidakLayak['id_bulan']]['tidak_layak'] = $tidakLayak['jumlah_tidak_layak'];
-        }
-
-        return $hasilGabungan;
+        $query = $this->db->query("SELECT 
+                                      id_bulan,
+                                      id_tahun,
+                                      SUM(CASE WHEN status = 'layak' THEN 1 ELSE 0 END) AS jumlah_layak,
+                                      SUM(CASE WHEN status = 'tidak layak' THEN 1 ELSE 0 END) AS jumlah_tidak_layak
+                                    FROM 
+                                      hasil
+                                    WHERE 
+                                      id_tahun = ?
+                                    GROUP BY 
+                                      id_bulan, id_tahun
+                                    ORDER BY 
+                                      id_bulan ASC", [$tahun]);
+        return $query->getResultArray();
     }
+
 
     public function hitungStatusPerBulanPerTahun($tahun)
     {

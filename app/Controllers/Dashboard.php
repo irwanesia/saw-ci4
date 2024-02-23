@@ -85,13 +85,19 @@ class Dashboard extends BaseController
 
     public function pieChart()
     {
+
         $chartData = $this->hasil->getPieChart();
         return $this->response->setJSON($chartData);
     }
 
-    public function barChart($tahun)
+    public function barChart($tahun = null)
     {
+        if (!$tahun) {
+            $tahun = 22; // Gunakan tahun saat ini sebagai default
+        }
+
         $chartData = $this->hasil->getBarChart($tahun);
+
         return $this->response->setJSON($chartData);
     }
 }

@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Dashboard::home');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/dashboard/pieChart', 'Dashboard::pieChart');
-$routes->get('/dashboard/barChart/(:any)', 'Dashboard::barChart/$i');
+$routes->get('/dashboard/barChart/(:any)', 'Dashboard::barChart/$1');
 $routes->get('/dashboard/chart/periode/(:any)', 'Dashboard::index/$1');
 
 // login
