@@ -118,7 +118,6 @@
             success: function(hasil) {
               // alert(hasil);
               var obj = $.parseJSON(hasil);
-              console.log(obj);
               $('#kodeKriteria').val(obj);
             }
           });
@@ -134,19 +133,23 @@
           fetch(barApiUrl)
             .then(response => response.json())
             .then(data => {
-              console.log(data);
+              // console.log(data);
               // Asumsikan data yang dikembalikan adalah array dengan objek untuk setiap bulan
               // yang memiliki properti 'layak' dan 'tidak_layak'
               const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
               const dataLayak = labels.map(label => {
                 const monthIndex = labels.indexOf(label) + 1;
                 const monthData = data.find(d => parseInt(d.id_bulan) === monthIndex);
-                return monthData ? monthData.layak : 0;
+                return monthData ? monthData.jumlah_layak : 0;
               });
+              // const testData = data.find(d => parseInt(d.id_bulan) === 1);
+              // console.log(testData);
+
+              // console.log(dataLayak);
               const dataTidakLayak = labels.map(label => {
                 const monthIndex = labels.indexOf(label) + 1;
                 const monthData = data.find(d => parseInt(d.id_bulan) === monthIndex);
-                return monthData ? monthData.tidak_layak : 0;
+                return monthData ? monthData.jumlah_tidak_layak : 0;
               });
 
               const barChartElement = document.getElementById('barChart');
@@ -237,7 +240,7 @@
           var bulan = document.getElementById('bulan').value;
           var tahun = document.getElementById('tahun').value;
           if (bulan != '#' && tahun != '#') {
-            window.location.href = `<?= base_url() ?>alternatif/periode/${bulan}/${tahun}`;
+            window.location.href = `<?= base_url() ?>nasabah/periode/${bulan}/${tahun}`;
           }
         }
       </script>

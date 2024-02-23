@@ -4,9 +4,7 @@
 <div class="card mt-5 shadow-sm">
     <div class="card-header d-sm-flex align-items-center justify-content-between">
         <h6 class="text-muted">Tambah Data Kriteria</h6>
-        <a href="<?= base_url('/kriteria') ?>" class="btn btn-secondary btn-sm"></span>
-            <span class="text">Kembali</span>
-        </a>
+
     </div>
 
     <form action="/kriteria/simpan" method="post">
@@ -51,7 +49,10 @@
         </div>
         <div class="card-footer text-right">
             <button name="submit" value="submit" type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan</button>
-            <button type="reset" class="btn btn-info btn-sm"><i class="fa fa-sync-alt"></i> Reset</button>
+            <!-- <button type="reset" class="btn btn-info btn-sm"><i class="fa fa-sync-alt"></i> Reset</button> -->
+            <a href="<?= base_url('/kriteria') ?>" class="btn btn-secondary btn-sm"></span>
+                <span class="text">Kembali</span>
+            </a>
         </div>
     </form>
 </div>

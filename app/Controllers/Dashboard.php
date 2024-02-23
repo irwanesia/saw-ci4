@@ -92,9 +92,9 @@ class Dashboard extends BaseController
 
     public function barChart($tahun = null)
     {
-        if (!$tahun) {
-            $tahun = 22; // Gunakan tahun saat ini sebagai default
-        }
+        // if (!$tahun) {
+        //     $tahun = 22; // Gunakan tahun saat ini sebagai default
+        // }
 
         $chartData = $this->hasil->getBarChart($tahun);
 

@@ -37,7 +37,7 @@ class Alternatif extends BaseController
         }
 
         $data = [
-            'title' => 'Data Alternatif',
+            'title' => 'Data Nasabah',
             'bulan' => $bulan,
             'tahun' => $tahun,
             'dataBulan' => $this->dataBulan,
@@ -47,10 +47,10 @@ class Alternatif extends BaseController
         return view('alternatif/index', $data);
     }
 
-    public function autoKode()
-    {
-        return json_encode($this->alternatif->generateCode());
-    }
+    // public function autoKode()
+    // {
+    //     return json_encode($this->alternatif->generateCode());
+    // }
 
     public function tambah()
     {
@@ -62,7 +62,7 @@ class Alternatif extends BaseController
         }
 
         $data = [
-            'title' => 'Tambah Data Alternatif',
+            'title' => 'Tambah Data Nasabah',
             'dataBulan' => $this->dataBulan,
             'dataTahun' => $this->dataTahun,
             'validation' => \Config\Services::validation()
@@ -83,21 +83,24 @@ class Alternatif extends BaseController
             ]
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/alternatif/simpan')->withInput()->with('validation', $validation);
+            return redirect()->to('/nasabah/simpan')->withInput()->with('validation', $validation);
         }
 
         $this->alternatif->save([
             'id_bulan' => $this->request->getVar('bulan'),
             'id_tahun' => $this->request->getVar('tahun'),
-            'kode' => $this->request->getVar('kode'),
             'alternatif' => $this->request->getVar('alternatif'),
+            'tgl_lahir' => $this->request->getVar('tglLahir'),
+            'alamat' => $this->request->getVar('alamat'),
+            'jns_kelamin' => $this->request->getVar('jnsKelamin'),
+            'no_telp' => $this->request->getVar('noTelp'),
         ]);
 
         // pesan data berhasil ditambah
-        $isipesan = '<script> alert("Alternatif berhasil ditambahkan!") </script>';
+        $isipesan = '<script> alert("Nasabah berhasil ditambahkan!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/alternatif');
+        return redirect()->to('/nasabah');
     }
 
     public function edit($id)
@@ -110,7 +113,7 @@ class Alternatif extends BaseController
         }
 
         $data = [
-            'title' => 'Edit Alternatif',
+            'title' => 'Edit Nasabah',
             'dataBulan' => $this->dataBulan,
             'dataTahun' => $this->dataTahun,
             'bulan' => $this->request->getVar('bulan'),
@@ -134,22 +137,25 @@ class Alternatif extends BaseController
             ]
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/alternatif/edit/' . $id)->withInput()->with('validation', $validation);
+            return redirect()->to('/nasabah/edit/' . $id)->withInput()->with('validation', $validation);
         }
 
         $this->alternatif->save([
             'id_alternatif' => $id,
             'id_bulan' =>  $this->request->getVar('bulan'),
             'id_tahun' =>  $this->request->getVar('tahun'),
-            'kode' =>  $this->request->getVar('kode'),
             'alternatif' => $this->request->getVar('alternatif'),
+            'tgl_lahir' => $this->request->getVar('tglLahir'),
+            'alamat' => $this->request->getVar('alamat'),
+            'jns_kelamin' => $this->request->getVar('jnsKelamin'),
+            'no_telp' => $this->request->getVar('noTelp'),
         ]);
 
         // pesan data berhasil ditambah
-        $isipesan = '<script> alert("Allternatif berhasil diupdate!") </script>';
+        $isipesan = '<script> alert("Nasabah berhasil diupdate!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/alternatif');
+        return redirect()->to('/nasabah');
     }
 
     public function delete($id)
@@ -167,6 +173,6 @@ class Alternatif extends BaseController
         $isipesan = '<script> alert("Data berhasil dihapus!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/alternatif');
+        return redirect()->to('/nasabah');
     }
 }

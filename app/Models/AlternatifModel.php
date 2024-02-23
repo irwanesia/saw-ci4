@@ -14,7 +14,7 @@ class AlternatifModel extends Model
     protected $returnType     = 'array';
     // protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_bulan', 'id_tahun', 'kode', 'alternatif'];
+    protected $allowedFields = ['id_bulan', 'id_tahun', 'alternatif', 'tgl_lahir', 'alamat', 'jns_kelamin', 'no_telp'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -26,31 +26,31 @@ class AlternatifModel extends Model
     protected $skipValidation     = false;
 
     // membuat kode alternatif auto
-    public function generateCode()
-    {
-        $builder = $this->table('alternatif');
-        $builder->selectMax('kode', 'kodeMax');
-        $query = $builder->get();
+    // public function generateCode()
+    // {
+    //     $builder = $this->table('alternatif');
+    //     $builder->selectMax('kode', 'kodeMax');
+    //     $query = $builder->get();
 
-        if ($query->getNumRows() > 0) {
-            $row = $query->getRow();
-            $kodeMax = $row->kodeMax;
+    //     if ($query->getNumRows() > 0) {
+    //         $row = $query->getRow();
+    //         $kodeMax = $row->kodeMax;
 
-            // Mengambil angka dari kode terakhir (menghapus 'A' dan mengkonversi ke integer)
-            $number = intval(substr($kodeMax, 1));
+    //         // Mengambil angka dari kode terakhir (menghapus 'A' dan mengkonversi ke integer)
+    //         $number = intval(substr($kodeMax, 1));
 
-            // Menambahkan 1 ke angka tersebut
-            $newNumber = $number + 1;
+    //         // Menambahkan 1 ke angka tersebut
+    //         $newNumber = $number + 1;
 
-            // Membentuk kode baru dengan format 'A' diikuti oleh angka baru
-            $newKode = 'A' . $newNumber;
-        } else {
-            // Jika tidak ada data, mulai dari 'A1'
-            $newKode = 'A1';
-        }
+    //         // Membentuk kode baru dengan format 'A' diikuti oleh angka baru
+    //         $newKode = 'A' . $newNumber;
+    //     } else {
+    //         // Jika tidak ada data, mulai dari 'A1'
+    //         $newKode = 'A1';
+    //     }
 
-        return $newKode;
-    }
+    //     return $newKode;
+    // }
 
     public function getPeriode($bulan, $tahun)
     {

@@ -21,10 +21,10 @@
                 <a href="<?= base_url('/alternatif') ?>" class="text-decoration-none">
                     <div class="card border-0 shadow-lg mb-3" id="menu">
                         <div class="card-body">
-                            <p class="fs-6 align-self-center fw-bold">Data Alternatif</p>
+                            <p class="fs-6 align-self-center fw-bold">Data Nasabah</p>
                             <div class="d-flex mt-3 justify-content-between">
                                 <h3 class="align-self-center"><?= $countAlternatif ?></h3>
-                                <span class="align-self-center"><i class="fas fa-map-signs"></i></span>
+                                <span class="align-self-center"><i class="fa fa-users" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>

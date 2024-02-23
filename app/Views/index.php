@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Kriteria</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-clipboard"></i></span>
+                            <span><i class="fas fa-clipboard"></i></span>
                         </div>
                     </div>
                 </div>
@@ -47,19 +47,19 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Sub Kriteria</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-clipboard-list"></i></span>
+                            <span><i class="fas fa-clipboard-list"></i></span>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
         <div class="col-xl-3 col-md-6">
-            <a href="<?= base_url('/alternatif') ?>" class="text-decoration-none">
+            <a href="<?= base_url('/nasabah') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h6 class="card-title align-self-center fw-bold">Alternatif</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-map-signs"></i></span>
+                            <h6 class="card-title align-self-center fw-bold">Nasabah</h6>
+                            <span><i class="fa fa-users" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Penilaian</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-keyboard"></i></span>
+                            <span><i class="fas fa-keyboard"></i></span>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Perhitungan</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-calculator"></i></span>
+                            <span><i class="fas fa-calculator"></i></span>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Hasil</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-poll"></i></span>
+                            <span><i class="fas fa-poll"></i></span>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h6 class="card-title align-self-center fw-bold">Users</h6>
-                            <span class="btn btn-outline-primary rounded-pill"><i class="fas fa-user"></i></span>
+                            <span><i class="fas fa-user"></i></span>
                         </div>
                     </div>
                 </div>
