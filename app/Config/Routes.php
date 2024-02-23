@@ -47,6 +47,7 @@ $routes->delete('/sub-kriteria/hapus/(:num)', 'Kriteria::deleteSubKriteria/$1');
 $routes->get('/nasabah', 'Alternatif::index');
 $routes->get('/nasabah/periode/(:any)/(:any)', 'Alternatif::index/$1/$2');
 $routes->get('/nasabah/tambah', 'Alternatif::tambah');
+$routes->get('/nasabah/tambah/periode/(:any)/(:any)', 'Alternatif::tambah/$1/$2');
 $routes->get('/nasabah/kode', 'Alternatif::autoKode');
 $routes->post('/nasabah/simpan', 'Alternatif::simpan');
 $routes->get('/nasabah/edit/(:num)', 'Alternatif::edit/$1');

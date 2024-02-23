@@ -11,10 +11,6 @@
         <div class="card-body px-5 py-4 mb-4">
             <input type="hidden" name="id" value="<?= $alternatif['id_alternatif'] ?>">
             <div class="row">
-                <div class="form-group col-md-6 mt-2 d-none">
-                    <label class="form-label">Kode Alternatif</label>
-                    <input type="text" name="kode" class="form-control" value="<?= $alternatif['kode'] ?>" readonly />
-                </div>
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">Periode Bulan</label>
                     <select class="form-control" name="bulan">
@@ -43,7 +39,7 @@
                 </div>
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">Tgl Lahir</label>
-                    <input autocomplete="off" type="date" name="tglLahir" class="form-control <?= ($validation->hasError('tglLahir')) ? 'is-invalid' : ''; ?>" value="<?= $alternatif['alternatif'] ?>" />
+                    <input autocomplete="off" type="date" name="tglLahir" class="form-control <?= ($validation->hasError('tglLahir')) ? 'is-invalid' : ''; ?>" value="<?= $alternatif['tgl_lahir'] ?>" />
                     <div class="invalid-feedback">
                         <?= $validation->getError('tglLahir'); ?>
                     </div>
@@ -52,7 +48,7 @@
             <div class="row">
                 <div class="form-group col-md-12 mt-2">
                     <label class="form-label">Alamat Nasabah</label>
-                    <textarea name="alamat" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" cols=" 30" rows="3"><?= $alternatif['alternatif'] ?></textarea>
+                    <textarea name="alamat" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" cols=" 30" rows="3"><?= $alternatif['alamat'] ?></textarea>
                     <div class="invalid-feedback">
                         <?= $validation->getError('alamat'); ?>
                     </div>
@@ -63,13 +59,13 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select class="form-control" name="jnsKelamin">
                         <option value="#" disabled selected>-- Pilih Jenis Kelamin --</option>
-                        <option value="l">Laki-laki</option>
-                        <option value="p">Perempuan</option>
+                        <option value="l" <?= $alternatif['jns_kelamin'] == "l" ? "selected" : "" ?>>Laki-laki</option>
+                        <option value="p" <?= $alternatif['jns_kelamin'] == "p" ? "selected" : "" ?>>Perempuan</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">No Telp</label>
-                    <input autocomplete="off" type="text" name="noTelp" class="form-control <?= ($validation->hasError('noTelp')) ? 'is-invalid' : ''; ?>" value="<?= $alternatif['alternatif'] ?>" />
+                    <input autocomplete="off" type="text" name="noTelp" class="form-control <?= ($validation->hasError('noTelp')) ? 'is-invalid' : ''; ?>" value="<?= $alternatif['no_telp'] ?>" />
                     <div class="invalid-feedback">
                         <?= $validation->getError('noTelp'); ?>
                     </div>

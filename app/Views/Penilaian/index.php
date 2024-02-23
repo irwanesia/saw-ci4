@@ -50,7 +50,7 @@
                     <thead>
                         <th>No</th>
                         <th>Kode</th>
-                        <th>Alternatif</th>
+                        <th>Nama Nasabah</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@
                         <?php foreach ($alternatif as $row) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $row['kode'] ?></td>
+                                <td><?= "A".$no-1 ?></td>
                                 <td><?= $row['alternatif'] ?></td>
                                 <td>
                                     <?php if (!empty(($row['isPenilaianExists']))) : ?>

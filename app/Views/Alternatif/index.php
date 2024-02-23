@@ -3,8 +3,11 @@
 <?= $this->section('content') ?>
 <div class="card mt-5 shadow-sm">
     <!-- /.card-header -->
-    <div class="card-header py-3">
+    <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
+        <?php if(empty($alternatif)) : ?>
+            <a href="<?= base_url('/nasabah/tambah/')?>" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
+        <?php endif ?>
     </div>
     <form id="periodeForm">
         <div class="row">
@@ -63,7 +66,7 @@
                                 <td><?= $row['alternatif'] ?></td>
                                 <td><?= $row['tgl_lahir'] ?></td>
                                 <td><?= $row['alamat'] ?></td>
-                                <td><?= $row['jns_kelamin'] ?></td>
+                                <td><?= $row['jns_kelamin'] == "l" ? "Laki-laki" : "Perempuan" ?></td>
                                 <td><?= $row['no_telp'] ?></td>
                                 <td>
                                     <form action="/nasabah/edit/<?= $row['id_alternatif'] ?>" method="get" class="d-inline">

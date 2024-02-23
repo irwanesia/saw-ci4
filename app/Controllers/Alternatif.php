@@ -52,7 +52,7 @@ class Alternatif extends BaseController
     //     return json_encode($this->alternatif->generateCode());
     // }
 
-    public function tambah()
+    public function tambah($bulan = null, $tahun = null)
     {
         // Pengecekan session login
         if (session()->get('login') != "login") {
@@ -63,6 +63,8 @@ class Alternatif extends BaseController
 
         $data = [
             'title' => 'Tambah Data Nasabah',
+            'bulan' => $bulan,
+            'tahun' => $tahun,
             'dataBulan' => $this->dataBulan,
             'dataTahun' => $this->dataTahun,
             'validation' => \Config\Services::validation()
@@ -86,9 +88,12 @@ class Alternatif extends BaseController
             return redirect()->to('/nasabah/simpan')->withInput()->with('validation', $validation);
         }
 
+        $bulan = $this->request->getVar('bulan');
+        $tahun = $this->request->getVar('tahun');
+
         $this->alternatif->save([
-            'id_bulan' => $this->request->getVar('bulan'),
-            'id_tahun' => $this->request->getVar('tahun'),
+            'id_bulan' => $bulan,
+            'id_tahun' => $tahun,
             'alternatif' => $this->request->getVar('alternatif'),
             'tgl_lahir' => $this->request->getVar('tglLahir'),
             'alamat' => $this->request->getVar('alamat'),
@@ -100,7 +105,7 @@ class Alternatif extends BaseController
         $isipesan = '<script> alert("Nasabah berhasil ditambahkan!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/nasabah');
+        return redirect()->to('/nasabah/periode/' . $bulan . '/' . $tahun);
     }
 
     public function edit($id)
@@ -140,10 +145,13 @@ class Alternatif extends BaseController
             return redirect()->to('/nasabah/edit/' . $id)->withInput()->with('validation', $validation);
         }
 
+        $bulan = $this->request->getVar('bulan');
+        $tahun = $this->request->getVar('tahun');
+
         $this->alternatif->save([
             'id_alternatif' => $id,
-            'id_bulan' =>  $this->request->getVar('bulan'),
-            'id_tahun' =>  $this->request->getVar('tahun'),
+            'id_bulan' =>  $bulan,
+            'id_tahun' =>  $tahun,
             'alternatif' => $this->request->getVar('alternatif'),
             'tgl_lahir' => $this->request->getVar('tglLahir'),
             'alamat' => $this->request->getVar('alamat'),
@@ -155,7 +163,7 @@ class Alternatif extends BaseController
         $isipesan = '<script> alert("Nasabah berhasil diupdate!") </script>';
         session()->setFlashdata('pesan', $isipesan);
 
-        return redirect()->to('/nasabah');
+        return redirect()->to('/nasabah/periode/' . $bulan . '/' . $tahun);
     }
 
     public function delete($id)

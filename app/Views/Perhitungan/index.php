@@ -5,11 +5,11 @@
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
-        <div>
-            <a class="btn btn-sm btn-primary align-self-center <?= $bulan == null ? 'd-none' : ''; ?>" href="/hasil/periode/<?= $bulan . '/' . $tahun; ?>">
+        <?php if($bulan != null && $tahun != null) : ?>
+            <a class="btn btn-sm btn-primary align-self-center" href="/hasil/periode/<?= $bulan . '/' . $tahun; ?>">
                 <i class="fa fa-eye" aria-hidden="true"></i> Lihat Hasil
             </a>
-        </div>
+        <?php endif ?>
     </div>
     <form id="periodeForm">
         <div class="row">
@@ -217,9 +217,15 @@
 
     <!-- jika tidak ada data tampilkan pesan -->
 <?php else : ?>
-    <div class="alert alert-info mt-5" role="alert">
-        Data tidak ada atau Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
-    </div>
+    <?php if($bulan != null && $tahun != null) : ?>
+        <div class="alert alert-info mt-5" role="alert">
+            Data yang dicari tidak ada, silahkan pilih periode bulan dan tahun yang lain!
+        </div>
+    <?php else : ?>
+        <div class="alert alert-info mt-5" role="alert">
+            Silakan pilih bulan dan tahun terlebih dahulu untuk menampilkan data!
+        </div>
+    <?php endif ?>
 <?php endif ?>
 
 <?= $this->endSection('content') ?>

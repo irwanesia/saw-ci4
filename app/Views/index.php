@@ -6,7 +6,7 @@
         <h6></h6>
         <div class="btn-group">
             <button class="btn btn-outline-info rounded-pill btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user"></i> Admin
+                <i class="fas fa-user"></i> <?= ucfirst($_SESSION['username']) ?>
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Profil</a></li>
@@ -28,8 +28,9 @@
     </div>
 
     <!-- menu -->
+    <?php if($_SESSION['role'] == 1) : ?>
     <div class="row mt-3">
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/kriteria') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -41,7 +42,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6 <?= $adaPilihan == '0' ? 'd-none' : '' ?>">
+        <div class="col-xl-3 col-md-4 <?= $adaPilihan == '0' ? 'd-none' : '' ?>">
             <a href="<?= base_url('/sub-kriteria') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -53,7 +54,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <?php endif ?>
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/nasabah') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -65,7 +67,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <?php if($_SESSION['role'] == 1) : ?>
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/penilaian') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -77,7 +80,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <?php endif ?>
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/perhitungan') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -89,7 +93,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/hasil') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -101,7 +105,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <?php if($_SESSION['role'] == 1) : ?>
+        <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/users') ?>" class="text-decoration-none">
                 <div class="card border-0 shadow-lg mb-3" id="menu">
                     <div class="card-body">
@@ -113,6 +118,7 @@
                 </div>
             </a>
         </div>
+        <?php endif ?>
     </div>
 </div>
 

@@ -48,33 +48,33 @@ class Users extends BaseController
 
     public function simpan()
     {
-        // validasi input
-        if (!$this->validate([
-            'username' => [
-                'rules' => 'required|is_unique[user.username]',
-                'errors' => [
-                    'required' => 'nama {field} harus diisi!',
-                    'is_unique' => 'username {field} sudah ada!'
-                ]
-            ],
-            'password' => [
-                'rules' => 'required|min_length[6]',
-                'errors' => [
-                    'required' => 'Password harus diisi!',
-                    'min_length' => 'Password minimal harus memiliki panjang 6 karakter!'
-                ]
-            ],
-            'confirm_password' => [
-                'rules' => 'required|matches[password]',
-                'errors' => [
-                    'required' => 'Konfirmasi password harus diisi!',
-                    'matches' => 'Konfirmasi password tidak cocok dengan password!'
-                ]
-            ]
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/users/simpan')->withInput()->with('validation', $validation);
-        }
+        // // validasi input
+        // if (!$this->validate([
+        //     'username' => [
+        //         'rules' => 'required|is_unique[user.username]',
+        //         // 'errors' => [
+        //         //     'required' => 'nama {field} harus diisi!',
+        //         //     'is_unique' => 'username {field} sudah ada!'
+        //         // ]
+        //     ],
+        //     'password' => [
+        //         'rules' => 'required|min_length[6]',
+        //         // 'errors' => [
+        //         //     'required' => 'Password harus diisi!',
+        //         //     'min_length' => 'Password minimal harus memiliki panjang 6 karakter!'
+        //         // ]
+        //     ],
+        //     'confirm_password' => [
+        //         'rules' => 'required|matches[password]',
+        //         // 'errors' => [
+        //         //     'required' => 'Konfirmasi password harus diisi!',
+        //         //     'matches' => 'Konfirmasi password tidak cocok dengan password!'
+        //         // ]
+        //     ]
+        // ])) {
+        //     // $validation = \Config\Services::validation();
+        //     return redirect()->to('/users/simpan');
+        // }
 
         // enkripsi password dengan Bcrypt
         $password = $this->request->getVar('password');
@@ -114,33 +114,33 @@ class Users extends BaseController
 
     public function update($id)
     {
-        // validasi input
-        if (!$this->validate([
-            'username' => [
-                'rules' => 'required|is_unique[user.username]',
-                'errors' => [
-                    'required' => 'nama {field} harus diisi!',
-                    'is_unique' => 'username {field} sudah ada!',
-                ]
-            ],
-            'password' => [
-                'rules' => 'required|min_length[6]',
-                'errors' => [
-                    'required' => 'Password harus diisi!',
-                    'min_length' => 'Password minimal harus memiliki panjang 6 karakter!',
-                ]
-            ],
-            'confirm_password' => [
-                'rules' => 'required|matches[password]',
-                'errors' => [
-                    'required' => 'Konfirmasi password harus diisi!',
-                    'matches' => 'Konfirmasi password tidak cocok dengan password!',
-                ]
-            ]
-        ])) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/users/edit/' . $id)->withInput()->with('validation', $validation);
-        }
+        // // validasi input
+        // if (!$this->validate([
+        //     'username' => [
+        //         'rules' => 'required|is_unique[user.username]',
+        //         'errors' => [
+        //             'required' => 'nama {field} harus diisi!',
+        //             'is_unique' => 'username {field} sudah ada!',
+        //         ]
+        //     ],
+        //     'password' => [
+        //         'rules' => 'required|min_length[6]',
+        //         'errors' => [
+        //             'required' => 'Password harus diisi!',
+        //             'min_length' => 'Password minimal harus memiliki panjang 6 karakter!',
+        //         ]
+        //     ],
+        //     'confirm_password' => [
+        //         'rules' => 'required|matches[password]',
+        //         'errors' => [
+        //             'required' => 'Konfirmasi password harus diisi!',
+        //             'matches' => 'Konfirmasi password tidak cocok dengan password!',
+        //         ]
+        //     ]
+        // ])) {
+        //     $validation = \Config\Services::validation();
+        //     return redirect()->to('/users/edit/' . $id)->withInput()->with('validation', $validation);
+        // }
 
         // verifikasi password
         $password = $this->request->getVar('password');

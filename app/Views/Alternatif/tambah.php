@@ -11,10 +11,7 @@
         <?= csrf_field() ?>
         <div class="card-body px-5 py-4 mb-4">
             <div class="row">
-                <div class="form-group col-md-6 mt-2 d-none">
-                    <label class="form-label">Kode Alternatif</label>
-                    <input id="kodeAlternatif" type="text" name="kode" class="form-control" readonly />
-                </div>
+                <?php if($bulan == null) : ?>
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">Periode Bulan</label>
                     <select class="form-control" name="bulan">
@@ -33,6 +30,22 @@
                         <?php endforeach ?>
                     </select>
                 </div>
+                <?php else : ?>
+                <div class="form-group col-md-6 mt-2">
+                    <label class="form-label">Periode Bulan</label>
+                    <input type="text" name="tahun" class="form-control" value="<?php
+                     foreach($dataBulan as $key => $bln){
+                        if(($key+1) == $bulan){
+                            echo $bln;
+                        }
+                     }
+                     ?>" readonly>
+                </div>
+                <div class="form-group col-md-6 mt-2">
+                    <label class="form-label">Periode Tahun</label>
+                    <input type="text" name="tahun" class="form-control" value="<?= "20".$tahun ?>" readonly>
+                </div>
+                <?php endif ?>
             </div>
             <div class="row mt-4">
                 <div class="form-group col-md-6 mt-2">

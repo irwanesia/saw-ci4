@@ -15,9 +15,9 @@
             <div class="row">
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">Username</label>
-                    <input autocomplete="off" type="text" name="username" value="<?= old('username') ?>" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" />
+                    <input autocomplete="off" type="text" name="username" value="<?= old('username') ?>" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" autofocus/>
                     <div class="invalid-feedback">
-                        <?= $validation->getError('username'); ?>
+                        <?php $validation->getError('username'); ?>
                     </div>
                 </div>
 
