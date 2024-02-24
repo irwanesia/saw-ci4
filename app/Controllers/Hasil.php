@@ -47,7 +47,7 @@ class Hasil extends BaseController
         return view('Hasil/index', $data);
     }
 
-    public function cetak($id_bulan = null, $id_tahun = null)
+    public function cetak($bulan = 1, $tahun = 22)
     {
         // Pengecekan session login
         if (session()->get('login') != "login") {
@@ -56,13 +56,15 @@ class Hasil extends BaseController
             return redirect()->to('/login');
         }
 
-        $this->subKriteria->delete($id);
-
-        // pesan berhasil didelete
-        $isipesan = '<script> alert("Data berhasil dihapus!") </script>';
-        session()->setFlashdata('pesan', $isipesan);
-
-        return redirect()->to('/sub-kriteria');
+        $data = [
+            'title' => 'cetak/hasil/periode',
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+            'dataBulan' => $this->dataBulan,
+            'dataTahun' => $this->dataTahun,
+            'hasil' => $this->hasil->getPeriode($bulan, $tahun),
+        ];
+        return view('Hasil/cetak', $data);
     }
 
     public function hapus($id_bulan = null, $id_tahun = null)

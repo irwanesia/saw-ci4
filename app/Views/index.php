@@ -28,32 +28,32 @@
     </div>
 
     <!-- menu -->
-    <?php if($_SESSION['role'] == 1) : ?>
     <div class="row mt-3">
-        <div class="col-xl-3 col-md-4">
-            <a href="<?= base_url('/kriteria') ?>" class="text-decoration-none">
-                <div class="card border-0 shadow-lg mb-3" id="menu">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title align-self-center fw-bold">Kriteria</h6>
-                            <span><i class="fas fa-clipboard"></i></span>
+        <?php if ($_SESSION['role'] == 1) : ?>
+            <div class="col-xl-3 col-md-4">
+                <a href="<?= base_url('/kriteria') ?>" class="text-decoration-none">
+                    <div class="card border-0 shadow-lg mb-3" id="menu">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="card-title align-self-center fw-bold">Kriteria</h6>
+                                <span><i class="fas fa-clipboard"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-xl-3 col-md-4 <?= $adaPilihan == '0' ? 'd-none' : '' ?>">
-            <a href="<?= base_url('/sub-kriteria') ?>" class="text-decoration-none">
-                <div class="card border-0 shadow-lg mb-3" id="menu">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title align-self-center fw-bold">Sub Kriteria</h6>
-                            <span><i class="fas fa-clipboard-list"></i></span>
+                </a>
+            </div>
+            <div class="col-xl-3 col-md-4 <?= $adaPilihan == '0' ? 'd-none' : '' ?>">
+                <a href="<?= base_url('/sub-kriteria') ?>" class="text-decoration-none">
+                    <div class="card border-0 shadow-lg mb-3" id="menu">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="card-title align-self-center fw-bold">Sub Kriteria</h6>
+                                <span><i class="fas fa-clipboard-list"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
         <?php endif ?>
         <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/nasabah') ?>" class="text-decoration-none">
@@ -67,19 +67,19 @@
                 </div>
             </a>
         </div>
-        <?php if($_SESSION['role'] == 1) : ?>
-        <div class="col-xl-3 col-md-4">
-            <a href="<?= base_url('/penilaian') ?>" class="text-decoration-none">
-                <div class="card border-0 shadow-lg mb-3" id="menu">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title align-self-center fw-bold">Penilaian</h6>
-                            <span><i class="fas fa-keyboard"></i></span>
+        <?php if ($_SESSION['role'] == 1) : ?>
+            <div class="col-xl-3 col-md-4">
+                <a href="<?= base_url('/penilaian') ?>" class="text-decoration-none">
+                    <div class="card border-0 shadow-lg mb-3" id="menu">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="card-title align-self-center fw-bold">Penilaian</h6>
+                                <span><i class="fas fa-keyboard"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
         <?php endif ?>
         <div class="col-xl-3 col-md-4">
             <a href="<?= base_url('/perhitungan') ?>" class="text-decoration-none">
@@ -105,19 +105,19 @@
                 </div>
             </a>
         </div>
-        <?php if($_SESSION['role'] == 1) : ?>
-        <div class="col-xl-3 col-md-4">
-            <a href="<?= base_url('/users') ?>" class="text-decoration-none">
-                <div class="card border-0 shadow-lg mb-3" id="menu">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title align-self-center fw-bold">Users</h6>
-                            <span><i class="fas fa-user"></i></span>
+        <?php if ($_SESSION['role'] == 1) : ?>
+            <div class="col-xl-3 col-md-4">
+                <a href="<?= base_url('/users') ?>" class="text-decoration-none">
+                    <div class="card border-0 shadow-lg mb-3" id="menu">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="card-title align-self-center fw-bold">Users</h6>
+                                <span><i class="fas fa-user"></i></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
         <?php endif ?>
     </div>
 </div>
