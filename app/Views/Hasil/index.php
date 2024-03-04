@@ -1,16 +1,16 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
         <!-- /.card-header -->
         <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
         </div>
         <form id="periodeForm">
-                <div class="row">
+                <div class="row mt-3">
                         <div class="col-md-3">
                                 <div class="card-body">
-                                        <select class="form-control" name="bulanH" id="bulanH">
+                                        <select class="form-select" name="bulanH" id="bulanH">
                                                 <option value="#" disabled selected>-- Pilih Bulan --</option>
                                                 <?php foreach ($dataBulan as $key => $month) : ?>
                                                         <option value="<?= $key + 1 ?>" <?= ($key + 1) == $bulan ? 'selected' : '' ?>><?= $month ?></option>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-md-3">
                                 <div class="card-body">
-                                        <select class="form-control" name="tahunH" id="tahunH">
+                                        <select class="form-select" name="tahunH" id="tahunH">
                                                 <option value="#" disabled selected>-- Pilih Tahun --</option>
                                                 <?php foreach ($dataTahun as $key => $year) : ?>
                                                         <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>

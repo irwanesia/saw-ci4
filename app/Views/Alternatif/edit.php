@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
     <div class="card-header d-sm-flex align-items-center justify-content-between">
         <h6 class="text-muted">Edit Data Nasabah</h6>
     </div>

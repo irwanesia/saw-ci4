@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
     <div class="card-header d-sm-flex align-items-center justify-content-between">
         <h6 class="text-muted">Tambah Data User</h6>
         <a href="<?= base_url('/users') ?>" class="btn btn-secondary btn-sm"></span>
@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="form-group col-md-6 mt-2">
                     <label class="form-label">Username</label>
-                    <input autocomplete="off" type="text" name="username" value="<?= old('username') ?>" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" autofocus/>
+                    <input autocomplete="off" type="text" name="username" value="<?= old('username') ?>" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" autofocus />
                     <div class="invalid-feedback">
                         <?php $validation->getError('username'); ?>
                     </div>

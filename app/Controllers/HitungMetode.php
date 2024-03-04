@@ -70,7 +70,7 @@ class HitungMetode extends BaseController
         }
 
         return view('Perhitungan/index', [
-            'title' => 'Perhitungan Metode SAW',
+            'title' => 'Perhitungan',
             'kriteria' => $kriteria,
             'data' => $data,
             'alternatif' => $this->alternatif->findAll(),

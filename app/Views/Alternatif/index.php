@@ -1,19 +1,19 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
-        <?php if(empty($alternatif)) : ?>
-            <a href="<?= base_url('/nasabah/tambah/')?>" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
+        <?php if (empty($alternatif)) : ?>
+            <a href="<?= base_url('/nasabah/tambah/') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
         <?php endif ?>
     </div>
     <form id="periodeForm">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-3">
                 <div class="card-body">
-                    <select class="form-control" name="bulan" id="bulan">
+                    <select class="form-select" name="bulan" id="bulan">
                         <option value="#" disabled selected>-- Pilih Bulan --</option>
                         <?php foreach ($dataBulan as $key => $month) : ?>
                             <option value="<?= $key + 1 ?>" <?= ($key + 1) == $bulan ? 'selected' : '' ?>><?= $month ?></option>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card-body">
-                    <select class="form-control" name="tahun" id="tahun">
+                    <select class="form-select" name="tahun" id="tahun">
                         <option value="#" disabled selected>-- Pilih Tahun --</option>
                         <?php foreach ($dataTahun as $key => $year) : ?>
                             <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>

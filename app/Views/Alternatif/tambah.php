@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
     <div class="card-header d-sm-flex align-items-center justify-content-between">
         <h6 class="text-muted">Tambah Data Nasabah</h6>
 
@@ -11,40 +11,40 @@
         <?= csrf_field() ?>
         <div class="card-body px-5 py-4 mb-4">
             <div class="row">
-                <?php if($bulan == null) : ?>
-                <div class="form-group col-md-6 mt-2">
-                    <label class="form-label">Periode Bulan</label>
-                    <select class="form-control" name="bulan">
-                        <option value="#" disabled selected>-- Pilih Bulan --</option>
-                        <?php foreach ($dataBulan as $key => $bulan) : ?>
-                            <option value="<?= $key + 1 ?>"><?= $bulan ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div class="form-group col-md-6 mt-2">
-                    <label class="form-label">Periode Tahun</label>
-                    <select class="form-control" name="tahun">
-                        <option value="#" disabled selected>-- Pilih Tahun --</option>
-                        <?php foreach ($dataTahun as $key => $tahun) : ?>
-                            <option value="<?= 2 . $key + 2 ?>"><?= $tahun ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
+                <?php if ($bulan == null) : ?>
+                    <div class="form-group col-md-6 mt-2">
+                        <label class="form-label">Periode Bulan</label>
+                        <select class="form-control" name="bulan">
+                            <option value="#" disabled selected>-- Pilih Bulan --</option>
+                            <?php foreach ($dataBulan as $key => $bulan) : ?>
+                                <option value="<?= $key + 1 ?>"><?= $bulan ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 mt-2">
+                        <label class="form-label">Periode Tahun</label>
+                        <select class="form-control" name="tahun">
+                            <option value="#" disabled selected>-- Pilih Tahun --</option>
+                            <?php foreach ($dataTahun as $key => $tahun) : ?>
+                                <option value="<?= 2 . $key + 2 ?>"><?= $tahun ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
                 <?php else : ?>
-                <div class="form-group col-md-6 mt-2">
-                    <label class="form-label">Periode Bulan</label>
-                    <input type="text" name="tahun" class="form-control" value="<?php
-                     foreach($dataBulan as $key => $bln){
-                        if(($key+1) == $bulan){
-                            echo $bln;
-                        }
-                     }
-                     ?>" readonly>
-                </div>
-                <div class="form-group col-md-6 mt-2">
-                    <label class="form-label">Periode Tahun</label>
-                    <input type="text" name="tahun" class="form-control" value="<?= "20".$tahun ?>" readonly>
-                </div>
+                    <div class="form-group col-md-6 mt-2">
+                        <label class="form-label">Periode Bulan</label>
+                        <input type="text" name="tahun" class="form-control" value="<?php
+                                                                                    foreach ($dataBulan as $key => $bln) {
+                                                                                        if (($key + 1) == $bulan) {
+                                                                                            echo $bln;
+                                                                                        }
+                                                                                    }
+                                                                                    ?>" readonly>
+                    </div>
+                    <div class="form-group col-md-6 mt-2">
+                        <label class="form-label">Periode Tahun</label>
+                        <input type="text" name="tahun" class="form-control" value="<?= "20" . $tahun ?>" readonly>
+                    </div>
                 <?php endif ?>
             </div>
             <div class="row mt-4">

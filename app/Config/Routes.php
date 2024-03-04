@@ -5,8 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Dashboard::home');
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/', 'Dashboard::index');
+// $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/dashboard/pieChart', 'Dashboard::pieChart');
 $routes->get('/dashboard/barChart/(:any)', 'Dashboard::barChart/$1');
 $routes->get('/dashboard/chart/periode/(:any)', 'Dashboard::index/$1');
@@ -19,6 +19,7 @@ $routes->get('/logout', 'Auth::logout');
 
 // routes data users
 $routes->get('/users', 'Users::index');
+$routes->get('/profile-user/(:num)', 'Users::profile/$1');
 $routes->get('/users/tambah', 'Users::tambah');
 $routes->get('/users/simpan', 'Users::simpan');
 $routes->post('/users/simpan', 'Users::simpan');

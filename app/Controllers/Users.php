@@ -95,6 +95,23 @@ class Users extends BaseController
         return redirect()->to('/users');
     }
 
+    public function profile($id)
+    {
+        // Pengecekan session login
+        if (session()->get('login') != "login") {
+            // Jika tidak ada session 'login', redirect ke halaman login dengan pesan error
+            session()->setFlashdata('error', 'Anda harus login terlebih dahulu.');
+            return redirect()->to('/login');
+        }
+
+        $data = [
+            'title' => 'Profile User',
+            'user' => $this->users->find($id),
+            'validation' => \Config\Services::validation()
+        ];
+        return view('/users/profile-user', $data);
+    }
+
     public function edit($id)
     {
         // Pengecekan session login

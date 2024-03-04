@@ -6,7 +6,7 @@
     <?= session()->getFlashdata('pesan') ?>
 <?php endif ?>
 <?php foreach ($subkriteriaData as $data) : ?>
-    <div class="card mt-5 shadow-sm">
+    <div class="card mt-3 shadow-sm">
         <div class="card-header d-flex justify-content-between">
             <h6 class="text-muted">Data Subkriteria untuk Kriteria "<b><?= ucwords($data['kriteria']['kriteria']) ?></b>"</h6>
             <form action="/sub-kriteria/tambah/<?= $data['kriteria']['id_kriteria'] ?>" method="get" class="d-inline">

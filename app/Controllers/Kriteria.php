@@ -176,7 +176,7 @@ class Kriteria extends BaseController
         // Kirim data ke view
         return view('SubKriteria/index', [
             'subkriteriaData' => $subkriteriaData,
-            'title' => 'Data Kriteria',
+            'title' => 'Data Sub Kriteria',
             'kriteria' => $this->kriteria->findAll(),
         ]);
     }

@@ -64,7 +64,7 @@ class Dashboard extends BaseController
             'tahun' => $tahun,
             'dataTahun' => $this->dataTahun,
         ];
-        return view('dashboard', $data);
+        return view('index', $data);
     }
 
     public function home()

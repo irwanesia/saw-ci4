@@ -53,7 +53,7 @@ class Penilaian extends BaseController
         }
 
         $data = [
-            'title' => 'Penilaian Alternatif',
+            'title' => 'Penilaian',
             'alternatif' => $alternatifList,
             'bulan' => $bulan,
             'tahun' => $tahun,

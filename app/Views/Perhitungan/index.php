@@ -1,21 +1,21 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<div class="card mt-5 shadow-sm">
+<div class="card mt-3 shadow-sm">
     <!-- /.card-header -->
     <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-cogs" aria-hidden="true"></i> Pilih Periode</h6>
-        <?php if($bulan != null && $tahun != null) : ?>
+        <?php if ($bulan != null && $tahun != null) : ?>
             <a class="btn btn-sm btn-primary align-self-center" href="/hasil/periode/<?= $bulan . '/' . $tahun; ?>">
                 <i class="fa fa-eye" aria-hidden="true"></i> Lihat Hasil
             </a>
         <?php endif ?>
     </div>
     <form id="periodeForm">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-3">
                 <div class="card-body">
-                    <select class="form-control" name="bulanP" id="bulanP">
+                    <select class="form-select" name="bulanP" id="bulanP">
                         <option value="#" disabled selected>-- Pilih Bulan --</option>
                         <?php foreach ($dataBulan as $key => $month) : ?>
                             <option value="<?= $key + 1 ?>" <?= ($key + 1) == $bulan ? 'selected' : '' ?>><?= $month ?></option>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card-body">
-                    <select class="form-control" name="tahunP" id="tahunP">
+                    <select class="form-select" name="tahunP" id="tahunP">
                         <option value="#" disabled selected>-- Pilih Tahun --</option>
                         <?php foreach ($dataTahun as $key => $year) : ?>
                             <option value="<?= 2 . $key + 2 ?>" <?= (2 . $key + 2) == $tahun ? 'selected' : '' ?>><?= $year ?></option>
@@ -130,8 +130,8 @@
                                 <td align="left"><?= $nama_alternatif ?></td>
                                 <?php foreach ($kriteria as $index => $key) : ?>
                                     <?php
-                                    $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
-                                    if ($nilai !== '-') {
+                                    $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : 0;
+                                    if ($nilai !== 0) {
                                         // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
                                         // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
                                         if ($key['type'] == "Benefit") {
@@ -140,7 +140,7 @@
                                             $nilaiDiBagi = $nilaiMin[$index] / $nilai;
                                         }
                                     } else {
-                                        $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan '-' sebagai output
+                                        $nilaiDiBagi = $nilai; // Jika tidak ada nilai, tetapkan 0 sebagai output
                                     }
                                     ?>
                                     <td><?= round($nilaiDiBagi, 3) ?></td>
@@ -181,8 +181,8 @@
                                         <?php $nilai_v = 0; ?>
                                         <?php foreach ($kriteria as $index => $key) : ?>
                                             <?php
-                                            $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : '-';
-                                            if ($nilai !== '-') {
+                                            $nilai = array_key_exists($key['id_kriteria'], $nilaiKriteria) ? $nilaiKriteria[$key['id_kriteria']] : 0;
+                                            if ($nilai !== 0) {
                                                 // Asumsikan bahwa indeks $nilaiMax sesuai dengan urutan kriteria berdasarkan id_kriteria
                                                 // Karena $nilaiMax diindeks mulai dari 0, kita gunakan $index yang juga dimulai dari 0 dalam loop kriteria
                                                 if ($key['type'] == "Benefit") {
@@ -217,7 +217,7 @@
 
     <!-- jika tidak ada data tampilkan pesan -->
 <?php else : ?>
-    <?php if($bulan != null && $tahun != null) : ?>
+    <?php if ($bulan != null && $tahun != null) : ?>
         <div class="alert alert-info mt-5" role="alert">
             Data yang dicari tidak ada, silahkan pilih periode bulan dan tahun yang lain!
         </div>
